@@ -5,7 +5,9 @@
     <adfmf:description>The main (and only!) feature.</adfmf:description>
     <adfmf:content id="com.oracle.lostToys.main.1" icon="img/navigator-icon.png" image="img/springboard-icon.png">
       <adfmf:amx file="com.oracle.lostToys.main/main-task-flow.xml#main-task-flow">
-        <adfmf:includes/>
+        <adfmf:includes>
+          <adfmf:include type="JavaScript" file="plugins/BeaconPlugin/iOS/js/BeaconPlugin.js" id="i1"/>
+        </adfmf:includes>
       </adfmf:amx>
     </adfmf:content>
     <adfmf:deviceFeatureAccess>

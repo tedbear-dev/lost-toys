@@ -37,7 +37,17 @@ window.beaconPlugin = {
         }
     },
 
-    test: function(){
+    vibrate: function(id){
+        window.Cordova.exec(
+            function(param){adf.mf.log.Application.logp(adf.mf.log.level.INFO,"beaconPlugin","vibrate: '" + param + "'");},
+            function(error){adf.mf.log.Application.logp(adf.mf.log.level.INFO,"beaconPlugin","vibrate:ERROR: '" + error + "'");},
+            "BeaconPlugin",
+            "vibrate",
+            [id]
+        );
+    },
+    
+    test: function(txt){
         window.Cordova.exec(
             function(param){adf.mf.log.Application.logp(adf.mf.log.level.INFO,"beaconPlugin","test: '" + param + "'");},
             function(error){alert("beaconPlugin.test ERROR: " + error);},

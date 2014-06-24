@@ -15,6 +15,10 @@
       <amx:panelLabelAndMessage label="Family UUID" id="plam2">
         <amx:outputText value="#{preferenceScope.application.preferences.familyUUID}" id="ot3"/>
       </amx:panelLabelAndMessage>
+      <amx:panelLabelAndMessage label="Sound ID" id="plam3">
+        <amx:outputText value="#{preferenceScope.application.preferences.soundID}" id="ot4"/>
+      </amx:panelLabelAndMessage>
     </amx:panelFormLayout>
+    <amx:commandButton text="Vibrate?" id="cb1" action="#{viewScope.TestBean.vibrate}"/>
   </amx:panelPage>
 </amx:view>

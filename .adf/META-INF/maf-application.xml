@@ -14,6 +14,15 @@
     <adfmf:preferenceGroup id="preferences" label="Preferences">
       <adfmf:preferenceNumber id="hugProximity" label="Hug Proximity" default="40"/>
       <adfmf:preferenceText id="familyUUID" label="Family UUID" default="8492E75F-4FD6-469D-B132-043FE94921D8"/>
+      <adfmf:preferenceNumber id="soundID" label="Sound ID" default="1003"/>
     </adfmf:preferenceGroup>
   </adfmf:preferences>
+  <adfmf:cordovaPlugins>
+    <adfmf:plugin fullyQualifiedName="BeaconPlugin" implementationClass="BeaconPlugin" name="BeaconPlugin"
+                  platform="iOS">
+      <adfmf:iosPluginInfo>
+        <adfmf:linkerFlags>-l BeaconPlugin</adfmf:linkerFlags>
+      </adfmf:iosPluginInfo>
+    </adfmf:plugin>
+  </adfmf:cordovaPlugins>
 </adfmf:application>
