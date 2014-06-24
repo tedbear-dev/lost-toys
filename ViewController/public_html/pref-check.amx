@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<amx:view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amx="http://xmlns.oracle.com/adf/mf/amx"
+          xmlns:dvtm="http://xmlns.oracle.com/adf/mf/amx/dvt">
+  <amx:panelPage id="pp1">
+    <amx:facet name="header">
+      <amx:outputText value="Preferences" id="ot1"/>
+    </amx:facet>
+    <amx:facet name="secondary">
+      <amx:commandButton id="cb2" text="Next"/> 
+    </amx:facet>
+    <amx:panelFormLayout id="pfl1">
+      <amx:panelLabelAndMessage label="Hug Proximity" id="plam1">
+        <amx:outputText value="#{preferenceScope.application.preferences.hugProximity}" id="ot2"/>
+      </amx:panelLabelAndMessage>
+      <amx:panelLabelAndMessage label="Family UUID" id="plam2">
+        <amx:outputText value="#{preferenceScope.application.preferences.familyUUID}" id="ot3"/>
+      </amx:panelLabelAndMessage>
+    </amx:panelFormLayout>
+  </amx:panelPage>
+</amx:view>

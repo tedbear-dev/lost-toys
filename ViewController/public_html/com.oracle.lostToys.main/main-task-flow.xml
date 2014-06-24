@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="US-ASCII" ?>
+<adfc-mobile-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.0">
+  <task-flow-definition id="main-task-flow">
+    <default-activity>pref-check</default-activity>
+    <view id="pref-check">
+      <page>/pref-check.amx</page>
+    </view>
+  </task-flow-definition>
+</adfc-mobile-config>

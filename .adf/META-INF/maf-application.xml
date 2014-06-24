@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfmf:application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adfmf="http://xmlns.oracle.com/adf/mf"
+                   version="0.1" name="Lost Toys" id="com.oracle.lostToys"
+                   appControllerFolder="ApplicationController"
+                   listener-class="com.oracle.lostToys.application.LifeCycleListenerImpl" vendor="Oracle">
+  <adfmf:description>A mobile app to help you find and befriend lost toys. An experiment with Oracle MAF and Estimote beacons.</adfmf:description>
+  <adfmf:deviceFeatureAccess>
+    <adfmf:deviceCamera access="true" id="dc1"/>
+    <adfmf:deviceLocation access="true" id="dl1"/>
+    <adfmf:deviceNetwork access="true" id="dn1"/>
+  </adfmf:deviceFeatureAccess>
+  <adfmf:featureReference id="com.oracle.lostToys.main"/>
+  <adfmf:preferences>
+    <adfmf:preferenceGroup id="preferences" label="Preferences">
+      <adfmf:preferenceNumber id="hugProximity" label="Hug Proximity" default="40"/>
+      <adfmf:preferenceText id="familyUUID" label="Family UUID" default="8492E75F-4FD6-469D-B132-043FE94921D8"/>
+    </adfmf:preferenceGroup>
+  </adfmf:preferences>
+</adfmf:application>
