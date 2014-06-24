@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfmf:features xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adfmf="http://xmlns.oracle.com/adf/mf">
+  <adfmf:feature id="com.oracle.lostToys.main" name="Lost Toys" vendor="Oracle" version="0.1"
+                 icon="img/navigator-icon.png" image="img/springboard-icon.png">
+    <adfmf:description>The main (and only!) feature.</adfmf:description>
+    <adfmf:content id="com.oracle.lostToys.main.1" icon="img/navigator-icon.png" image="img/springboard-icon.png">
+      <adfmf:amx file="com.oracle.lostToys.main/main-task-flow.xml#main-task-flow">
+        <adfmf:includes/>
+      </adfmf:amx>
+    </adfmf:content>
+    <adfmf:deviceFeatureAccess>
+      <adfmf:deviceCamera access="true" id="dc1"/>
+      <adfmf:deviceLocation access="true" id="dl1"/>
+      <adfmf:deviceNetwork access="true" id="dn1"/>
+    </adfmf:deviceFeatureAccess>
+    <adfmf:preferences/>
+  </adfmf:feature>
+</adfmf:features>
