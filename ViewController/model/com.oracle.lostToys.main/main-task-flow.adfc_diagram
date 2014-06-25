@@ -15,8 +15,68 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">185.80078</property>
+         name="y">197.66797</property>
       <property
-         name="x">329.0</property>
+         name="x">185.0</property>
    </View>
+   <View
+      id="View3">
+      <property
+         name="activityId">toy-gallery</property>
+      <property
+         name="page">/toy-gallery.amx</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>toy-gallery&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">145.40234</property>
+      <property
+         name="x">467.0</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase5"
+      from="View2"
+      to="View3">
+      <property
+         name="fromOutcome">gotoToyGallery</property>
+      <property
+         name="sdm:polyPoints">R50,226.64687,197.60156,425.35315,145.33594,L50</property>
+   </ControlFlowCase>
+   <View
+      id="View6">
+      <property
+         name="activityId">maintain-toy</property>
+      <property
+         name="page">/maintain-toy.amx</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>maintain-toy&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">381.46875</property>
+      <property
+         name="x">472.0</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase7"
+      from="View3"
+      to="View6">
+      <property
+         name="fromOutcome">newToy</property>
+      <property
+         name="sdm:polyPoints">B44,463.5,199.47246,468.5,327.46875,T44</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase8"
+      from="View6"
+      to="View3">
+      <property
+         name="fromOutcome">gotoGallery</property>
+      <property
+         name="sdm:polyPoints">T56,475.5,327.33215,470.5,199.33594,B56</property>
+   </ControlFlowCase>
 </SDM>

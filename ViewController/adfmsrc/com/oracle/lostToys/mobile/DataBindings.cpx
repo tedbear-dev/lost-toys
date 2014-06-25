@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.1.3.16.21" id="DataBindings"
+             SeparateXMLFiles="false" Package="com.oracle.lostToys.mobile" ClientType="Generic">
+  <pageMap>
+    <page path="/toy-gallery.amx" usageId="com_oracle_lostToys_mobile_toy_galleryPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="com_oracle_lostToys_mobile_toy_galleryPageDef"
+          path="com.oracle.lostToys.mobile.pageDefs.toy_galleryPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <dc id="ToyGallery" path="com.oracle.lostToys.application.ToyGallery"/>
+  </dataControlUsages>
+</Application>

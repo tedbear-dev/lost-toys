@@ -7,8 +7,45 @@
       <managed-bean-class>com.oracle.lostToys.mobile.TestBean</managed-bean-class>
       <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
+    <managed-bean id="__5">
+      <managed-bean-name>ToyGallery</managed-bean-name>
+      <managed-bean-class>com.oracle.lostToys.model.ToyGallery</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__8">
+      <managed-bean-name>TakePictureBean</managed-bean-name>
+      <managed-bean-class>com.oracle.lostToys.model.TakePictureBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
     <view id="pref-check">
       <page>/pref-check.amx</page>
     </view>
+    <view id="toy-gallery">
+      <page>/toy-gallery.amx</page>
+    </view>
+    <view id="maintain-toy">
+      <page>/maintain-toy.amx</page>
+    </view>
+    <control-flow-rule id="__2">
+      <from-activity-id>pref-check</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>gotoToyGallery</from-outcome>
+        <to-activity-id>toy-gallery</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>toy-gallery</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>newToy</from-outcome>
+        <to-activity-id>maintain-toy</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__9">
+      <from-activity-id>maintain-toy</from-activity-id>
+      <control-flow-case id="__10">
+        <from-outcome>gotoGallery</from-outcome>
+        <to-activity-id>toy-gallery</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
   </task-flow-definition>
 </adfc-mobile-config>

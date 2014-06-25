@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<amx:view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amx="http://xmlns.oracle.com/adf/mf/amx"
+          xmlns:dvtm="http://xmlns.oracle.com/adf/mf/amx/dvt">
+  <amx:panelPage id="pp1">
+    <amx:facet name="header">
+      <amx:outputText value="Gallery" id="ot1"/>
+    </amx:facet>
+    <amx:carousel id="c1" value="#{pageFlowScope.ToyGallery.befriendedToys}" var="item">
+      <amx:facet name="nodeStamp">
+        <amx:carouselItem text="#{item.name}" id="ci1">
+          <amx:image id="i1" source="#{item.image}"/>
+        </amx:carouselItem>
+      </amx:facet>
+    </amx:carousel>
+    <amx:commandButton text="New" id="cb1" action="newToy"/>
+  </amx:panelPage>
+</amx:view>

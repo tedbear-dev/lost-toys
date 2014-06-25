@@ -6,7 +6,7 @@
       <amx:outputText value="Preferences" id="ot1"/>
     </amx:facet>
     <amx:facet name="secondary">
-      <amx:commandButton id="cb2" text="Next"/> 
+      <amx:commandButton id="cb2" text="Next" action="gotoToyGallery"/> 
     </amx:facet>
     <amx:panelFormLayout id="pfl1">
       <amx:panelLabelAndMessage label="Hug Proximity" id="plam1">
