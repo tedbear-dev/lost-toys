@@ -18,6 +18,9 @@
       <amx:panelLabelAndMessage label="Sound ID" id="plam3">
         <amx:outputText value="#{preferenceScope.application.preferences.soundID}" id="ot4"/>
       </amx:panelLabelAndMessage>
+      <amx:panelLabelAndMessage label="Debug?" id="plam4">
+        <amx:outputText value="#{preferenceScope.application.preferences.debugMode}" id="ot5"/>
+      </amx:panelLabelAndMessage>
     </amx:panelFormLayout>
     <amx:commandButton text="Vibrate?" id="cb1" action="#{viewScope.TestBean.vibrate}"/>
   </amx:panelPage>

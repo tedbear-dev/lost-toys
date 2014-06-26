@@ -5,10 +5,14 @@
     <amx:facet name="header">
       <amx:outputText value="Gallery" id="ot1"/>
     </amx:facet>
-    <amx:carousel id="c1" value="#{pageFlowScope.ToyGallery.befriendedToys}" var="item">
+    <amx:carousel id="c1" value="#{bindings.toys.collectionModel}" var="item" controlArea="none">
       <amx:facet name="nodeStamp">
         <amx:carouselItem text="#{item.name}" id="ci1">
-          <amx:image id="i1" source="#{item.image}"/>
+          <amx:commandLink id="cl1" action="gotoFindFriend">
+              <amx:image id="i1" source="#{item.image}"/>
+            <amx:setPropertyListener id="spl2" from="#{item.major}" to="#{pageFlowScope.ToyGallery.selectedMajor}" type="action"/>
+            <amx:setPropertyListener id="spl3" from="#{item.minor}" to="#{pageFlowScope.ToyGallery.selectedMinor}" type="action"/>
+          </amx:commandLink>
         </amx:carouselItem>
       </amx:facet>
     </amx:carousel>

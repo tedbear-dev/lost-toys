@@ -26,6 +26,9 @@
     <view id="maintain-toy">
       <page>/maintain-toy.amx</page>
     </view>
+    <view id="find-friend">
+      <page>/find-friend.amx</page>
+    </view>
     <control-flow-rule id="__2">
       <from-activity-id>pref-check</from-activity-id>
       <control-flow-case id="__3">
@@ -39,11 +42,26 @@
         <from-outcome>newToy</from-outcome>
         <to-activity-id>maintain-toy</to-activity-id>
       </control-flow-case>
+      <control-flow-case id="__4">
+        <from-outcome>gotoFindFriend</from-outcome>
+        <to-activity-id>find-friend</to-activity-id>
+      </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__9">
       <from-activity-id>maintain-toy</from-activity-id>
       <control-flow-case id="__10">
         <from-outcome>gotoGallery</from-outcome>
+        <to-activity-id>toy-gallery</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__11">
+      <from-activity-id>find-friend</from-activity-id>
+      <control-flow-case id="__12">
+        <from-outcome>foundFriend</from-outcome>
+        <to-activity-id>maintain-toy</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__13">
+        <from-outcome>cancelFinding</from-outcome>
         <to-activity-id>toy-gallery</to-activity-id>
       </control-flow-case>
     </control-flow-rule>

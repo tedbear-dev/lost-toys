@@ -15,6 +15,7 @@
       <adfmf:preferenceNumber id="hugProximity" label="Hug Proximity" default="40"/>
       <adfmf:preferenceText id="familyUUID" label="Family UUID" default="8492E75F-4FD6-469D-B132-043FE94921D8"/>
       <adfmf:preferenceNumber id="soundID" label="Sound ID" default="1003"/>
+      <adfmf:preferenceBoolean id="debugMode" label="Debug?" default="true"/>
     </adfmf:preferenceGroup>
   </adfmf:preferences>
   <adfmf:cordovaPlugins>

@@ -67,14 +67,14 @@ public class BefriendedToy {
         super();
     }
 
-    public BefriendedToy(String name,String image) {
+    public BefriendedToy(String name,String image,int major,int minor,String uuid) {
         super();
         
         this.name = name;
         this.image = image;
-        this.minor = 0;
-        this.major = 0;
-        this.uuid = null;
+        this.minor = major;
+        this.major = minor;
+        this.uuid = uuid;
     }
     
     public void addPropertyChangeListener(PropertyChangeListener l) {

@@ -9,6 +9,7 @@
           path="com.oracle.lostToys.mobile.pageDefs.toy_galleryPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
+    <dc id="ToyListDC" path="com.oracle.lostToys.mobile.ToyListDC"/>
     <dc id="ToyGallery" path="com.oracle.lostToys.application.ToyGallery"/>
   </dataControlUsages>
 </Application>
