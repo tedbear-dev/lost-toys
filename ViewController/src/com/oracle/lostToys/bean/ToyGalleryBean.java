@@ -3,6 +3,8 @@ package com.oracle.lostToys.bean;
 
 import com.oracle.lostToys.data.Toy;
 
+import com.oracle.lostToys.util.Exec;
+
 import com.sun.util.logging.Level;
 
 import com.sun.util.logging.Logger;
@@ -48,22 +50,7 @@ public class ToyGalleryBean {
     private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
     
     private Toy selected = null;
-    
-    private String selectedId = "0.0";    
-    public String getSelectedId(){return selectedId;}
-    
-    public void setSetSelectedById(String id){
         
-        try{
-            AmxMethodActionBinding ve = (AmxMethodActionBinding)AdfmfJavaUtilities.evaluateELExpression("#{bindings.findToyById}");
-            selectedId = id;
-            setSelectedToy((Toy) ((ConcreteJavaBeanObject)ve.execute()).getInstance());
-        }
-        catch(Exception ex){
-            Trace.log(Utility.FrameworkLogger,Level.SEVERE,ToyGalleryBean.class, "setSelectedById", ex);    
-        }
-    }
-    
     public void setSelectedToy(Toy selected) {
         Toy oldSelected = this.selected;
         this.selected = (Toy) selected;
@@ -84,5 +71,17 @@ public class ToyGalleryBean {
 
     public void removePropertyChangeListener(PropertyChangeListener l) {
         propertyChangeSupport.removePropertyChangeListener(l);
+    }
+
+    public String selectToy() {
+        
+        try{
+            setSelectedToy((Toy)Exec.methodBinding("findToyById"));
+        }
+        catch(Exception ex){
+            Trace.log(Utility.FrameworkLogger,Level.SEVERE,ToyGalleryBean.class, "setSelectedById", ex);    
+        }
+        
+        return "gotoFindFriend";
     }
 }

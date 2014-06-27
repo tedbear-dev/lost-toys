@@ -28,7 +28,7 @@
     <methodAction id="findToyById" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findToyById"
                   IsViewObjectMethod="false" DataControl="ToyList" InstanceName="data.ToyList.dataProvider"
                   ReturnName="data.ToyList.methodResults.findToyById_ToyList_dataProvider_findToyById_result">
-      <NamedData NDName="id" NDValue="${pageFlowScope.ToyGallery.selectedId}" NDType="java.lang.String"/>
+      <NamedData NDName="id" NDValue="#{bindings.findToyById_id}" NDType="java.lang.String"/>
     </methodAction>
   </bindings>
 </pageDefinition>

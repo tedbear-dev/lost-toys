@@ -1,5 +1,7 @@
 package com.oracle.lostToys.bean;
 
+import com.oracle.lostToys.util.Exec;
+
 import com.sun.util.logging.Level;
 
 import java.sql.Connection;
@@ -21,19 +23,9 @@ import oracle.adfmf.util.logging.Trace;
 public class EditToyBean {
 
     private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+
+    String newPicture = null;
     
-    private String newUuid = "";
-    private int newMajor = 0;
-    private int newMinor = 0;
-    private String newName = "";
-    private String newPicture = null;
-
-    public String getNewUuid(){return newUuid;}
-    public int getNewMajor() {return newMajor;}
-    public int getNewMinor() {return newMinor;}
-    public String getNewName() {return newName;}
-    public String getNewPicture() {return newPicture;}
-
     public EditToyBean() {
     }
 
@@ -72,14 +64,11 @@ public class EditToyBean {
     
     public String saveChanges(){
         
-        newUuid = "no-uuid";
-        newMajor = 123;
-        newMinor = 456;
-        newName = "no name";
-        
         try{
-            AmxMethodActionBinding ve = (AmxMethodActionBinding)AdfmfJavaUtilities.evaluateELExpression("#{bindings.addNewToy}");
-            ve.execute();
+            Exec.methodBinding("addNewToy",
+                new String[]{"uuid","major","minor","name","image"},
+                new Object[]{"new-uuid",new Integer(123),new Integer(456),"No Name",newPicture}
+            );
         }
         catch(Exception ex){
             Trace.log(Utility.FrameworkLogger,Level.SEVERE,EditToyBean.class, "saveChanges", ex);    

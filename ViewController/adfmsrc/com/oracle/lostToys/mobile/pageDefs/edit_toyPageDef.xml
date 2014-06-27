@@ -14,11 +14,11 @@
   <bindings>
     <methodAction id="addNewToy" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addNewToy"
                   IsViewObjectMethod="false" DataControl="ToyList" InstanceName="data.ToyList.dataProvider">
-      <NamedData NDName="uuid" NDValue="${viewScope.EditToyBean.newUuid}" NDType="java.lang.String"/>
-      <NamedData NDName="major" NDValue="${viewScope.EditToyBean.newMajor}" NDType="int"/>
-      <NamedData NDName="minor" NDValue="${viewScope.EditToyBean.newMinor}" NDType="int"/>
-      <NamedData NDName="name" NDValue="${viewScope.EditToyBean.newName}" NDType="java.lang.String"/>
-      <NamedData NDName="image" NDValue="${viewScope.EditToyBean.newPicture}" NDType="java.lang.String"/>
+      <NamedData NDName="uuid" NDValue="#{bindings.addNewToy_uuid}" NDType="java.lang.String"/>
+      <NamedData NDName="major" NDValue="#{bindings.addNewToy_major}" NDType="int"/>
+      <NamedData NDName="minor" NDValue="#{bindings.addNewToy_minor}" NDType="int"/>
+      <NamedData NDName="name" NDValue="#{bindings.addNewToy_name}" NDType="java.lang.String"/>
+      <NamedData NDName="image" NDValue="#{bindings.addNewToy_image}" NDType="java.lang.String"/>
     </methodAction>
   </bindings>
 </pageDefinition>
