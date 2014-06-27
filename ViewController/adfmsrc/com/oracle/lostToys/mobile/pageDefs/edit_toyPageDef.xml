@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.16.21" id="edit_toyPageDef"
+                Package="com.oracle.lostToys.mobile.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables">
+      <variable Type="java.lang.String" Name="addNewToy_uuid" IsQueriable="false"/>
+      <variable Type="int" Name="addNewToy_major" IsQueriable="false"/>
+      <variable Type="int" Name="addNewToy_minor" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="addNewToy_name" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="addNewToy_image" IsQueriable="false"/>
+    </variableIterator>
+  </executables>
+  <bindings>
+    <methodAction id="addNewToy" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addNewToy"
+                  IsViewObjectMethod="false" DataControl="ToyList" InstanceName="data.ToyList.dataProvider">
+      <NamedData NDName="uuid" NDValue="${viewScope.EditToyBean.newUuid}" NDType="java.lang.String"/>
+      <NamedData NDName="major" NDValue="${viewScope.EditToyBean.newMajor}" NDType="int"/>
+      <NamedData NDName="minor" NDValue="${viewScope.EditToyBean.newMinor}" NDType="int"/>
+      <NamedData NDName="name" NDValue="${viewScope.EditToyBean.newName}" NDType="java.lang.String"/>
+      <NamedData NDName="image" NDValue="${viewScope.EditToyBean.newPicture}" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>
