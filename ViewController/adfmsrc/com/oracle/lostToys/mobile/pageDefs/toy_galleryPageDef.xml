@@ -3,21 +3,32 @@
                 Package="com.oracle.lostToys.mobile.pageDefs">
   <parameters/>
   <executables>
-    <iterator Binds="root" RangeSize="25" DataControl="ToyListDC" id="ToyListDCIterator"/>
-    <accessorIterator MasterBinding="ToyListDCIterator" Binds="toys" RangeSize="25" DataControl="ToyListDC"
-                      BeanClass="com.oracle.lostToys.model.BefriendedToy" id="toysIterator"/>
+    <iterator Binds="root" RangeSize="25" DataControl="ToyList" id="ToyListIterator"/>
+    <accessorIterator MasterBinding="ToyListIterator" Binds="toys" RangeSize="25" DataControl="ToyList"
+                      BeanClass="com.oracle.lostToys.data.Toy" id="toysIterator"/>
+    <methodIterator Binds="findToyById.result" DataControl="ToyList" RangeSize="25"
+                    BeanClass="com.oracle.lostToys.data.Toy" id="findToyByIdIterator"/>
+    <variableIterator id="variables">
+      <variable Type="java.lang.String" Name="findToyById_id" IsQueriable="false"/>
+    </variableIterator>
   </executables>
   <bindings>
     <tree IterBinding="toysIterator" id="toys">
-      <nodeDefinition DefName="com.oracle.lostToys.model.BefriendedToy" Name="toys0">
+      <nodeDefinition DefName="com.oracle.lostToys.data.Toy" Name="toys0">
         <AttrNames>
           <Item Value="uuid"/>
           <Item Value="major"/>
           <Item Value="minor"/>
+          <Item Value="id"/>
           <Item Value="name"/>
           <Item Value="image"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <methodAction id="findToyById" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findToyById"
+                  IsViewObjectMethod="false" DataControl="ToyList" InstanceName="data.ToyList.dataProvider"
+                  ReturnName="data.ToyList.methodResults.findToyById_ToyList_dataProvider_findToyById_result">
+      <NamedData NDName="id" NDValue="${pageFlowScope.ToyGallery.selectedId}" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

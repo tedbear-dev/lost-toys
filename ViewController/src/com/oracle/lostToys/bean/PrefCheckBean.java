@@ -1,10 +1,10 @@
-package com.oracle.lostToys.mobile;
+package com.oracle.lostToys.bean;
 
 import oracle.adfmf.framework.api.AdfmfContainerUtilities;
 import oracle.adfmf.framework.api.AdfmfJavaUtilities;
 
-public class TestBean {
-    public TestBean() {
+public class PrefCheckBean {
+    public PrefCheckBean() {
     }
 
     public String vibrate() {

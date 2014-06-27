@@ -7,24 +7,24 @@
       <property
          name="activityId">pref-check</property>
       <property
-         name="page">/pref-check.amx</property>
+         name="page">/page/pref-check.amx</property>
       <property
-         name="start">true</property>
+         name="start">false</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>pref-check&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+         name="description">&lt;html>&lt;p>&lt;b>pref-check&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">197.66797</property>
+         name="y">242.26953</property>
       <property
-         name="x">185.0</property>
+         name="x">265.0</property>
    </View>
    <View
       id="View3">
       <property
          name="activityId">toy-gallery</property>
       <property
-         name="page">/toy-gallery.amx</property>
+         name="page">/page/toy-gallery.amx</property>
       <property
          name="description">&lt;html>&lt;p>&lt;b>toy-gallery&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
@@ -42,22 +42,22 @@
       <property
          name="fromOutcome">gotoToyGallery</property>
       <property
-         name="sdm:polyPoints">R50,226.0,197.60156,426.0,145.33594,L50</property>
+         name="sdm:polyPoints">R50,306.0,242.20312,426.0,148.83594,L54</property>
    </ControlFlowCase>
    <View
       id="View6">
       <property
-         name="activityId">maintain-toy</property>
+         name="activityId">edit-toy</property>
       <property
-         name="page">/maintain-toy.amx</property>
+         name="page">/page/edit-toy.amx</property>
       <property
-         name="description">&lt;html>&lt;p>&lt;b>maintain-toy&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+         name="description">&lt;html>&lt;p>&lt;b>edit-toy&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">381.46875</property>
+         name="y">147.26953</property>
       <property
-         name="x">472.0</property>
+         name="x">718.0</property>
    </View>
    <ControlFlowCase
       islink="true"
@@ -67,7 +67,7 @@
       <property
          name="fromOutcome">newToy</property>
       <property
-         name="sdm:polyPoints">B44,463.5,199.37694,465.0,327.40234,T39</property>
+         name="sdm:polyPoints">R46,508.04004,141.83594,677.0,143.76953,L46</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -77,22 +77,22 @@
       <property
          name="fromOutcome">gotoGallery</property>
       <property
-         name="sdm:polyPoints">T50,472.0,327.36136,470.5,199.33594,B56</property>
+         name="sdm:polyPoints">L54,676.95996,150.76953,508.0,148.83594,R54</property>
    </ControlFlowCase>
    <View
       id="View9">
       <property
          name="activityId">find-friend</property>
       <property
-         name="page">/find-friend.amx</property>
+         name="page">/page/find-friend.amx</property>
       <property
          name="description">&lt;html>&lt;p>&lt;b>find-friend&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">225.73438</property>
+         name="y">449.46875</property>
       <property
-         name="x">687.0</property>
+         name="x">470.0</property>
    </View>
    <ControlFlowCase
       islink="true"
@@ -102,7 +102,7 @@
       <property
          name="fromOutcome">gotoFindFriend</property>
       <property
-         name="sdm:polyPoints">R50,508.0,145.33594,646.0,225.66797,L50</property>
+         name="sdm:polyPoints">B44,463.5,199.33594,463.0,393.71402,T39</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -112,7 +112,7 @@
       <property
          name="fromOutcome">foundFriend</property>
       <property
-         name="sdm:polyPoints">L54,646.0,229.16797,479.0,327.40234,T61</property>
+         name="sdm:polyPoints">T61,477.0,395.40234,718.0,201.26953,B50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -122,6 +122,41 @@
       <property
          name="fromOutcome">cancelFinding</property>
       <property
-         name="sdm:polyPoints">L22,R30</property>
+         name="sdm:polyPoints">T50,470.0,393.72293,470.5,199.34486,B56</property>
    </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase18"
+      from="Router25"
+      to="View2">
+      <property
+         name="fromOutcome">yes</property>
+      <property
+         name="sdm:polyPoints">R54,116.0,147.83984,224.0,242.20312,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase19"
+      from="Router25"
+      to="View3">
+      <property
+         name="fromOutcome">no</property>
+      <property
+         name="sdm:polyPoints">R46,117.31926,140.83984,426.0,141.83594,L46</property>
+   </ControlFlowCase>
+   <Router
+      id="Router25">
+      <property
+         name="activityId">show-prefs</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>show-prefs&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Router&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">144.40625</property>
+      <property
+         name="x">75.0</property>
+   </Router>
 </SDM>

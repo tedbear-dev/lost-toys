@@ -5,6 +5,10 @@
     <amx:facet name="header">
       <amx:outputText value="Toy" id="ot1"/>
     </amx:facet>
-    <amx:commandButton text="Take Picture" id="cb1" action="#{viewScope.TakePictureBean.snap}"/>
+    <amx:image id="i1" source="#{viewScope.EditToyBean.image}"/>
+    <amx:commandButton text="Take Photo" id="cb1" actionListener="#{viewScope.EditToyBean.takePicture}"/>
+    <amx:commandButton text="Choose Photo" id="cb2" actionListener="#{viewScope.EditToyBean.choosePicture}"/>
+    <amx:commandButton text="Save" id="cb3" action="#{viewScope.EditToyBean.saveChanges}"/>
+    <amx:commandButton text="Cancel" id="cb4" action="gotoGallery"/>
   </amx:panelPage>
 </amx:view>

@@ -1,67 +1,96 @@
 <?xml version="1.0" encoding="US-ASCII" ?>
 <adfc-mobile-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.0">
   <task-flow-definition id="main-task-flow">
-    <default-activity>pref-check</default-activity>
+    <default-activity>show-prefs</default-activity>
     <managed-bean id="__1">
-      <managed-bean-name>TestBean</managed-bean-name>
-      <managed-bean-class>com.oracle.lostToys.mobile.TestBean</managed-bean-class>
+      <managed-bean-name>PrefCheckBean</managed-bean-name>
+      <managed-bean-class>com.oracle.lostToys.bean.PrefCheckBean</managed-bean-class>
       <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
     <managed-bean id="__5">
       <managed-bean-name>ToyGallery</managed-bean-name>
-      <managed-bean-class>com.oracle.lostToys.model.ToyGallery</managed-bean-class>
+      <managed-bean-class>com.oracle.lostToys.bean.ToyGalleryBean</managed-bean-class>
       <managed-bean-scope>pageFlow</managed-bean-scope>
     </managed-bean>
     <managed-bean id="__8">
-      <managed-bean-name>TakePictureBean</managed-bean-name>
-      <managed-bean-class>com.oracle.lostToys.model.TakePictureBean</managed-bean-class>
+      <managed-bean-name>EditToyBean</managed-bean-name>
+      <managed-bean-class>com.oracle.lostToys.bean.EditToyBean</managed-bean-class>
       <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
+    <managed-bean id="__21">
+      <managed-bean-name>ApplicationBean</managed-bean-name>
+      <managed-bean-class>com.oracle.lostToys.bean.ApplicationBean</managed-bean-class>
+      <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
     <view id="pref-check">
-      <page>/pref-check.amx</page>
+      <page>/page/pref-check.amx</page>
     </view>
     <view id="toy-gallery">
-      <page>/toy-gallery.amx</page>
+      <page>/page/toy-gallery.amx</page>
     </view>
-    <view id="maintain-toy">
-      <page>/maintain-toy.amx</page>
+    <view id="edit-toy">
+      <page>/page/edit-toy.amx</page>
     </view>
     <view id="find-friend">
-      <page>/find-friend.amx</page>
+      <page>/page/find-friend.amx</page>
     </view>
+    <router id="show-prefs">
+      <case id="__22">
+        <expression>#{ApplicationBean.debug}</expression>
+        <outcome>yes</outcome>
+      </case>
+      <default-outcome>no</default-outcome>
+    </router>
     <control-flow-rule id="__2">
       <from-activity-id>pref-check</from-activity-id>
       <control-flow-case id="__3">
         <from-outcome>gotoToyGallery</from-outcome>
         <to-activity-id>toy-gallery</to-activity-id>
+        <transition>fade</transition>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__6">
       <from-activity-id>toy-gallery</from-activity-id>
       <control-flow-case id="__7">
         <from-outcome>newToy</from-outcome>
-        <to-activity-id>maintain-toy</to-activity-id>
+        <to-activity-id>edit-toy</to-activity-id>
+        <transition>slideLeft</transition>
       </control-flow-case>
       <control-flow-case id="__4">
         <from-outcome>gotoFindFriend</from-outcome>
         <to-activity-id>find-friend</to-activity-id>
+        <transition>flipUp</transition>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__9">
-      <from-activity-id>maintain-toy</from-activity-id>
+      <from-activity-id>edit-toy</from-activity-id>
       <control-flow-case id="__10">
         <from-outcome>gotoGallery</from-outcome>
         <to-activity-id>toy-gallery</to-activity-id>
+        <transition>slideRight</transition>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__11">
       <from-activity-id>find-friend</from-activity-id>
       <control-flow-case id="__12">
         <from-outcome>foundFriend</from-outcome>
-        <to-activity-id>maintain-toy</to-activity-id>
+        <to-activity-id>edit-toy</to-activity-id>
+        <transition>slideLeft</transition>
       </control-flow-case>
       <control-flow-case id="__13">
         <from-outcome>cancelFinding</from-outcome>
+        <to-activity-id>toy-gallery</to-activity-id>
+        <transition>flipDown</transition>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__23">
+      <from-activity-id>show-prefs</from-activity-id>
+      <control-flow-case id="__24">
+        <from-outcome>yes</from-outcome>
+        <to-activity-id>pref-check</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__25">
+        <from-outcome>no</from-outcome>
         <to-activity-id>toy-gallery</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
