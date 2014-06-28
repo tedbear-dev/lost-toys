@@ -8,7 +8,7 @@
     <amx:carousel id="c1" value="#{bindings.toys.collectionModel}" var="item" controlArea="none">
       <amx:facet name="nodeStamp">
         <amx:carouselItem text="#{item.name}" id="ci1">
-          <amx:commandLink id="cl1" action="#{pageFlowScope.ToyGallery.selectToy}">
+          <amx:commandLink id="cl1" action="#{viewScope.ToyGallery.selectToy}">
               <amx:image id="i1" source="#{item.image}"/>
             <amx:setPropertyListener id="spl4" from="#{item.id}" to="#{bindings.findToyById_id}" type="action"/>
           </amx:commandLink>

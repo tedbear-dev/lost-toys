@@ -11,8 +11,11 @@
     <amx:facet name="secondary">
       <amx:commandButton id="cb2" text="Found" action="foundFriend"/>
     </amx:facet>
-    <amx:image id="i1" source="#{pageFlowScope.ToyGallery.selectedToy.image}"/>
-    <amx:outputText value="#{pageFlowScope.ToyGallery.selectedToy.major}" id="ot2"/>
-    <amx:outputText value="#{pageFlowScope.ToyGallery.selectedToy.minor}" id="ot3"/>
+    <amx:image id="i1" source="#{viewScope.FindFriend.image}"/>
+    <amx:outputText value="#{viewScope.FindFriend.major}.#{viewScope.FindFriend.minor}" id="ot2"/>
+    <amx:outputText value="#{viewScope.FindFriend.proximity}" id="ot4"/>
+    
+    <dvtm:dialGauge id="dialGauge1" indicator="needleAntique" minValue="0" maxValue="100" background="domeAntique"
+                    value="#{viewScope.FindFriend.proximity}" inlineStyle="width:100%;"/>
   </amx:panelPage>
 </amx:view>

@@ -30,19 +30,19 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">145.40234</property>
+         name="y">140.26953</property>
       <property
-         name="x">467.0</property>
+         name="x">647.0</property>
    </View>
    <ControlFlowCase
       islink="true"
       id="ControlFlowCase5"
       from="View2"
-      to="View3">
+      to="MethodCall17">
       <property
          name="fromOutcome">gotoToyGallery</property>
       <property
-         name="sdm:polyPoints">R50,306.0,242.20312,426.0,148.83594,L54</property>
+         name="sdm:polyPoints">R50,306.0,242.20312,436.0,143.03516,L54</property>
    </ControlFlowCase>
    <View
       id="View6">
@@ -55,9 +55,9 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">147.26953</property>
+         name="y">141.13672</property>
       <property
-         name="x">718.0</property>
+         name="x">836.0</property>
    </View>
    <ControlFlowCase
       islink="true"
@@ -67,7 +67,7 @@
       <property
          name="fromOutcome">newToy</property>
       <property
-         name="sdm:polyPoints">R46,508.04004,141.83594,677.0,143.76953,L46</property>
+         name="sdm:polyPoints">R46,688.0284,136.70312,795.0,137.57031,L46</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -77,7 +77,7 @@
       <property
          name="fromOutcome">gotoGallery</property>
       <property
-         name="sdm:polyPoints">L54,676.95996,150.76953,508.0,148.83594,R54</property>
+         name="sdm:polyPoints">L54,794.9716,144.57031,688.0,143.70312,R54</property>
    </ControlFlowCase>
    <View
       id="View9">
@@ -90,9 +90,9 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">449.46875</property>
+         name="y">449.33594</property>
       <property
-         name="x">470.0</property>
+         name="x">827.0</property>
    </View>
    <ControlFlowCase
       islink="true"
@@ -102,7 +102,7 @@
       <property
          name="fromOutcome">gotoFindFriend</property>
       <property
-         name="sdm:polyPoints">B44,463.5,199.33594,463.0,393.71402,T39</property>
+         name="sdm:polyPoints">B44,643.5,196.83965,820.0,395.26953,T39</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -112,7 +112,7 @@
       <property
          name="fromOutcome">foundFriend</property>
       <property
-         name="sdm:polyPoints">T61,477.0,395.40234,718.0,201.26953,B50</property>
+         name="sdm:polyPoints">T61,834.0,395.26953,836.0,195.07031,B50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -122,7 +122,7 @@
       <property
          name="fromOutcome">cancelFinding</property>
       <property
-         name="sdm:polyPoints">T50,470.0,393.72293,470.5,199.34486,B56</property>
+         name="sdm:polyPoints">T50,827.0,392.6199,650.5,194.20312,B56</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
@@ -138,11 +138,11 @@
       islink="true"
       id="ControlFlowCase19"
       from="Router25"
-      to="View3">
+      to="MethodCall17">
       <property
          name="fromOutcome">no</property>
       <property
-         name="sdm:polyPoints">R46,117.31926,140.83984,426.0,141.83594,L46</property>
+         name="sdm:polyPoints">R46,116.0,140.83984,434.79117,136.03516,L46</property>
    </ControlFlowCase>
    <Router
       id="Router25">
@@ -159,4 +159,27 @@
       <property
          name="x">75.0</property>
    </Router>
+   <MethodCall
+      id="MethodCall17">
+      <property
+         name="activityId">init-beacons</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>init-beacons&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">139.60156</property>
+      <property
+         name="x">477.0</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase20"
+      from="MethodCall17"
+      to="View3">
+      <property
+         name="fromOutcome">start</property>
+      <property
+         name="sdm:polyPoints">R50,518.0,139.53516,606.0,140.20312,L50</property>
+   </ControlFlowCase>
 </SDM>

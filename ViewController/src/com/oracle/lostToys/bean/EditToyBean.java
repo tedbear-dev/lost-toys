@@ -1,6 +1,6 @@
 package com.oracle.lostToys.bean;
 
-import com.oracle.lostToys.util.Exec;
+import com.oracle.lostToys.EL;
 
 import com.sun.util.logging.Level;
 
@@ -42,37 +42,34 @@ public class EditToyBean {
         propertyChangeSupport.firePropertyChange("image", oldPicture, getImage());            
     }
     
-    public void choosePicture(ActionEvent evt) {
-       
-        String selectedPicture = DeviceManagerFactory.getDeviceManager().getPicture(100,
-                    DeviceManager.CAMERA_DESTINATIONTYPE_DATA_URL,
-                    DeviceManager.CAMERA_SOURCETYPE_PHOTOLIBRARY, false,
-                    DeviceManager.CAMERA_ENCODINGTYPE_PNG, 0, 0);
+    private String getPicture(int source){
 
-        setImage(selectedPicture);
+        return DeviceManagerFactory.getDeviceManager().getPicture(
+            75,
+            DeviceManager.CAMERA_DESTINATIONTYPE_DATA_URL,
+            source, 
+            false,
+            DeviceManager.CAMERA_ENCODINGTYPE_JPEG, 
+            256, 
+            256
+        );
+    }
+    
+    public void choosePicture(ActionEvent evt) {
+        setImage(getPicture(DeviceManager.CAMERA_SOURCETYPE_PHOTOLIBRARY));
     }
 
-    public void takePicture(ActionEvent evt) {
-       
-        String selectedPicture = DeviceManagerFactory.getDeviceManager().getPicture(100,
-                    DeviceManager.CAMERA_DESTINATIONTYPE_DATA_URL,
-                    DeviceManager.CAMERA_SOURCETYPE_CAMERA, false,
-                    DeviceManager.CAMERA_ENCODINGTYPE_PNG, 0, 0);
-        
-        setImage(selectedPicture);
+    public void takePicture(ActionEvent evt) {     
+        setImage(getPicture(DeviceManager.CAMERA_SOURCETYPE_CAMERA));
     }
     
     public String saveChanges(){
         
-        try{
-            Exec.methodBinding("addNewToy",
-                new String[]{"uuid","major","minor","name","image"},
-                new Object[]{"new-uuid",new Integer(123),new Integer(456),"No Name",newPicture}
-            );
-        }
-        catch(Exception ex){
-            Trace.log(Utility.FrameworkLogger,Level.SEVERE,EditToyBean.class, "saveChanges", ex);    
-        }
+        EL.exec(
+            "addNewToy",
+            new String[]{"uuid","major","minor","name","image"},
+            new Object[]{"new-uuid",new Integer(123),new Integer(456),"No Name",newPicture}
+        );
            
         return "gotoGallery";
     }

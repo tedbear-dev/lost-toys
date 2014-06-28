@@ -92,8 +92,8 @@ public class Toy {
         
         this.name = name;
         this.image = image;
-        this.minor = major;
-        this.major = minor;
+        this.minor = minor;
+        this.major = major;
         this.uuid = uuid;
         
         this.id = this.major+"."+this.minor;

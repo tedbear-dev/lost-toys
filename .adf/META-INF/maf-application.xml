@@ -18,6 +18,9 @@
       <adfmf:preferenceBoolean id="debugMode" label="Debug?" default="true"/>
     </adfmf:preferenceGroup>
   </adfmf:preferences>
+  <adfmf:navigation>
+    <adfmf:navigationBar enabled="false"/>
+  </adfmf:navigation>
   <adfmf:cordovaPlugins>
     <adfmf:plugin fullyQualifiedName="BeaconPlugin" implementationClass="BeaconPlugin" name="BeaconPlugin"
                   platform="iOS">

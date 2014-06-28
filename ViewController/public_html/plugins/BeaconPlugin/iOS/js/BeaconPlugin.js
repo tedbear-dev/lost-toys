@@ -7,6 +7,14 @@
 
 window.beaconPlugin = {
     
+    callbackClazz: "",
+    beaconClazz: "",
+    
+    defineClasses: function(callbackClass,beaconClass){
+        window.beaconPlugin.callbackClazz = callbackClass;
+        window.beaconPlugin.beaconClazz = beaconClass;    
+    },
+    
     startMonitoring: function(proximityUUID,regionID,fake)
     {
     
@@ -40,7 +48,7 @@ window.beaconPlugin = {
     vibrate: function(id){
         window.Cordova.exec(
             function(param){adf.mf.log.Application.logp(adf.mf.log.level.INFO,"beaconPlugin","vibrate: '" + param + "'");},
-            function(error){adf.mf.log.Application.logp(adf.mf.log.level.INFO,"beaconPlugin","vibrate:ERROR: '" + error + "'");},
+            function(error){adf.mf.log.Application.logp(adf.mf.log.level.SEVERE,"beaconPlugin","vibrate:ERROR: '" + error + "'");},
             "BeaconPlugin",
             "vibrate",
             [id]
@@ -94,10 +102,10 @@ window.beaconPlugin = {
                  alert("Error invoking method in refreshBeacons: request=" + JSON.stringify(request) + ", response=" + JSON.stringify(response));
              };
              
-             adf.mf.api.invokeMethod("com.oracle.demo.beacon.monitor.mobile.RangeBeanProxy","startBeaconListUpdate",success,error);
+             adf.mf.api.invokeMethod(window.beaconPlugin.callbackClazz,"startUpdate",success,error);
              for(var i = 0;i < beacons.length;i++){
-                adf.mf.api.invokeMethod("com.oracle.demo.beacon.monitor.mobile.RangeBeanProxy","addBeaconToList", {
-                        ".type":"com.oracle.demo.beacon.monitor.mobile.BeaconBean",
+                adf.mf.api.invokeMethod(window.beaconPlugin.callbackClazz,"add", {
+                        ".type":window.beaconPlugin.beaconClazz,
                         "major":beacons[i].major,
                         "minor":beacons[i].minor,
                         "rssi":beacons[i].rssi,
@@ -109,7 +117,7 @@ window.beaconPlugin = {
                     success,error
                 );
              }
-             adf.mf.api.invokeMethod("com.oracle.demo.beacon.monitor.mobile.RangeBeanProxy","endBeaconListUpdate",success,error);    
+             adf.mf.api.invokeMethod(window.beaconPlugin.callbackClazz,"endUpdate",success,error);    
     },
     
     locationManagerDelegate: 

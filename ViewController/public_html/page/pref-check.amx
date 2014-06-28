@@ -22,6 +22,7 @@
         <amx:outputText value="#{preferenceScope.application.preferences.debugMode}" id="ot5"/>
       </amx:panelLabelAndMessage>
     </amx:panelFormLayout>
-    <amx:commandButton text="Vibrate?" id="cb1" action="#{viewScope.TestBean.vibrate}"/>
+    <amx:commandButton text="Vibrate?" id="cb1" action="#{viewScope.PrefCheck.vibrate}"/>
+    <amx:commandButton text="Beacons?" id="cb3" action="#{viewScope.PrefCheck.test}"/>
   </amx:panelPage>
 </amx:view>

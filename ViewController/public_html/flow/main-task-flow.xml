@@ -3,24 +3,29 @@
   <task-flow-definition id="main-task-flow">
     <default-activity>show-prefs</default-activity>
     <managed-bean id="__1">
-      <managed-bean-name>PrefCheckBean</managed-bean-name>
+      <managed-bean-name>PrefCheck</managed-bean-name>
       <managed-bean-class>com.oracle.lostToys.bean.PrefCheckBean</managed-bean-class>
       <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
     <managed-bean id="__5">
       <managed-bean-name>ToyGallery</managed-bean-name>
       <managed-bean-class>com.oracle.lostToys.bean.ToyGalleryBean</managed-bean-class>
-      <managed-bean-scope>pageFlow</managed-bean-scope>
+      <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
     <managed-bean id="__8">
-      <managed-bean-name>EditToyBean</managed-bean-name>
+      <managed-bean-name>EditToy</managed-bean-name>
       <managed-bean-class>com.oracle.lostToys.bean.EditToyBean</managed-bean-class>
       <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
     <managed-bean id="__21">
-      <managed-bean-name>ApplicationBean</managed-bean-name>
-      <managed-bean-class>com.oracle.lostToys.bean.ApplicationBean</managed-bean-class>
+      <managed-bean-name>Main</managed-bean-name>
+      <managed-bean-class>com.oracle.lostToys.bean.MainBean</managed-bean-class>
       <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__14">
+      <managed-bean-name>FindFriend</managed-bean-name>
+      <managed-bean-class>com.oracle.lostToys.bean.FindFriendBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
     <view id="pref-check">
       <page>/page/pref-check.amx</page>
@@ -36,16 +41,22 @@
     </view>
     <router id="show-prefs">
       <case id="__22">
-        <expression>#{ApplicationBean.debug}</expression>
+        <expression>#{applicationScope.Main.debug}</expression>
         <outcome>yes</outcome>
       </case>
       <default-outcome>no</default-outcome>
     </router>
+    <method-call id="init-beacons">
+      <method>#{Main.initBeacons}</method>
+      <outcome>
+        <fixed-outcome>start</fixed-outcome>
+      </outcome>
+    </method-call>
     <control-flow-rule id="__2">
       <from-activity-id>pref-check</from-activity-id>
       <control-flow-case id="__3">
         <from-outcome>gotoToyGallery</from-outcome>
-        <to-activity-id>toy-gallery</to-activity-id>
+        <to-activity-id>init-beacons</to-activity-id>
         <transition>fade</transition>
       </control-flow-case>
     </control-flow-rule>
@@ -91,6 +102,13 @@
       </control-flow-case>
       <control-flow-case id="__25">
         <from-outcome>no</from-outcome>
+        <to-activity-id>init-beacons</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__15">
+      <from-activity-id>init-beacons</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome>start</from-outcome>
         <to-activity-id>toy-gallery</to-activity-id>
       </control-flow-case>
     </control-flow-rule>

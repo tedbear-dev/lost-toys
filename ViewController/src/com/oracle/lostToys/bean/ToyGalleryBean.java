@@ -3,7 +3,7 @@ package com.oracle.lostToys.bean;
 
 import com.oracle.lostToys.data.Toy;
 
-import com.oracle.lostToys.util.Exec;
+import com.oracle.lostToys.EL;
 
 import com.sun.util.logging.Level;
 
@@ -46,42 +46,14 @@ import oracle.adfmf.util.Utility;
 import oracle.adfmf.util.logging.Trace;
 
 public class ToyGalleryBean {
-    
-    private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
-    
-    private Toy selected = null;
-        
-    public void setSelectedToy(Toy selected) {
-        Toy oldSelected = this.selected;
-        this.selected = (Toy) selected;
-        propertyChangeSupport.firePropertyChange("selectedToy", oldSelected, selected);
-    }
-
-    public Toy getSelectedToy() {
-        return selected;
-    }
 
     public ToyGalleryBean() {
         super();
     }
     
-    public void addPropertyChangeListener(PropertyChangeListener l) {
-        propertyChangeSupport.addPropertyChangeListener(l);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener l) {
-        propertyChangeSupport.removePropertyChangeListener(l);
-    }
-
     public String selectToy() {
         
-        try{
-            setSelectedToy((Toy)Exec.methodBinding("findToyById"));
-        }
-        catch(Exception ex){
-            Trace.log(Utility.FrameworkLogger,Level.SEVERE,ToyGalleryBean.class, "setSelectedById", ex);    
-        }
-        
+        EL.set("applicationScope.Main.selectedToy", EL.exec("findToyById"));        
         return "gotoFindFriend";
     }
 }
