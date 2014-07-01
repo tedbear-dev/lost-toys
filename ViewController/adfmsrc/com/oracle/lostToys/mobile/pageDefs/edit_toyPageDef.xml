@@ -9,7 +9,18 @@
       <variable Type="int" Name="addNewToy_minor" IsQueriable="false"/>
       <variable Type="java.lang.String" Name="addNewToy_name" IsQueriable="false"/>
       <variable Type="java.lang.String" Name="addNewToy_image" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="updateExistingToy_uuid" IsQueriable="false"/>
+      <variable Type="int" Name="updateExistingToy_major" IsQueriable="false"/>
+      <variable Type="int" Name="updateExistingToy_minor" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="updateExistingToy_name" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="updateExistingToy_image" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="findToyById_id" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="deleteToy_uuid" IsQueriable="false"/>
+      <variable Type="int" Name="deleteToy_major" IsQueriable="false"/>
+      <variable Type="int" Name="deleteToy_minor" IsQueriable="false"/>
     </variableIterator>
+    <methodIterator Binds="findToyById.result" DataControl="ToyList" RangeSize="25"
+                    BeanClass="com.oracle.lostToys.data.Toy" id="findToyByIdIterator"/>
   </executables>
   <bindings>
     <methodAction id="addNewToy" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addNewToy"
@@ -19,6 +30,25 @@
       <NamedData NDName="minor" NDValue="#{bindings.addNewToy_minor}" NDType="int"/>
       <NamedData NDName="name" NDValue="#{bindings.addNewToy_name}" NDType="java.lang.String"/>
       <NamedData NDName="image" NDValue="#{bindings.addNewToy_image}" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="updateExistingToy" RequiresUpdateModel="true" Action="invokeMethod" MethodName="updateExistingToy"
+                  IsViewObjectMethod="false" DataControl="ToyList" InstanceName="data.ToyList.dataProvider">
+      <NamedData NDName="uuid" NDType="java.lang.String" NDValue="${bindings.updateExistingToy_uuid}"/>
+      <NamedData NDName="major" NDType="int" NDValue="${bindings.updateExistingToy_major}"/>
+      <NamedData NDName="minor" NDType="int" NDValue="${bindings.updateExistingToy_minor}"/>
+      <NamedData NDName="name" NDType="java.lang.String" NDValue="${bindings.updateExistingToy_name}"/>
+      <NamedData NDName="image" NDType="java.lang.String" NDValue="${bindings.updateExistingToy_image}"/>
+    </methodAction>
+    <methodAction id="findToyById" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findToyById"
+                  IsViewObjectMethod="false" DataControl="ToyList" InstanceName="data.ToyList.dataProvider"
+                  ReturnName="data.ToyList.methodResults.findToyById_ToyList_dataProvider_findToyById_result">
+      <NamedData NDName="id" NDType="java.lang.String" NDValue="${bindings.findToyById_id}"/>
+    </methodAction>
+    <methodAction id="deleteToy" RequiresUpdateModel="true" Action="invokeMethod" MethodName="deleteToy"
+                  IsViewObjectMethod="false" DataControl="ToyList" InstanceName="data.ToyList.dataProvider">
+      <NamedData NDName="uuid" NDType="java.lang.String" NDValue="${bindings.deleteToy_uuid}"/>
+      <NamedData NDName="major" NDType="int" NDValue="${bindings.deleteToy_major}"/>
+      <NamedData NDName="minor" NDType="int" NDValue="${bindings.deleteToy_minor}"/>
     </methodAction>
   </bindings>
 </pageDefinition>

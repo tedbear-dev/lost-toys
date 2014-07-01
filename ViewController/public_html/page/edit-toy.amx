@@ -5,10 +5,37 @@
     <amx:facet name="header">
       <amx:outputText value="Toy" id="ot1"/>
     </amx:facet>
-    <amx:image id="i1" source="#{viewScope.EditToy.image}"/>
-    <amx:commandButton text="Take Photo" id="cb1" actionListener="#{viewScope.EditToy.takePicture}"/>
-    <amx:commandButton text="Choose Photo" id="cb2" actionListener="#{viewScope.EditToy.choosePicture}"/>
-    <amx:commandButton text="Save" id="cb3" action="#{viewScope.EditToy.saveChanges}"/>
-    <amx:commandButton text="Cancel" id="cb4" action="gotoGallery"/>
+    <amx:facet name="primary">
+      <amx:commandButton text="Gallery" id="cb4" action="gotoGallery"/>
+    </amx:facet>
+    
+        <amx:outputText value="Give a hug to the Lost Toy you want to adopt!" id="ot5" rendered="#{!pageFlowScope.EditToy.close}"/>
+       
+        <amx:panelGroupLayout id="pgl1" layout="vertical" rendered="#{pageFlowScope.EditToy.close}">
+        <amx:image id="i1" source="#{pageFlowScope.EditToy.image}"/>
+        <amx:commandButton text="Take Photo" id="cb1" actionListener="#{pageFlowScope.EditToy.takePicture}"/>
+        <amx:commandButton text="Choose Photo" id="cb2" actionListener="#{pageFlowScope.EditToy.choosePicture}"/>
+        <amx:inputText label="Name" id="it1" value="#{pageFlowScope.EditToy.newName}" inputType="text"/>
+        <amx:commandButton text="Save" id="cb3" action="#{pageFlowScope.EditToy.saveChanges}"/>
+      <amx:commandButton text="Unadopt" id="cb5">
+        <amx:showPopupBehavior id="spb1" popupId="p1" align="overlapMiddleCenter" type="action" alignId="pp1"/>
+      </amx:commandButton>
+        </amx:panelGroupLayout>
+        
+
+        <amx:outputText value="#{pageFlowScope.EditToy.newUuid}" id="ot2"/>
+        <amx:outputText value="#{pageFlowScope.EditToy.newMajor}.#{pageFlowScope.EditToy.newMinor}" id="ot3"/>
+        <amx:outputText value="#{pageFlowScope.EditToy.image}" id="ot4"/>
+    
+    
   </amx:panelPage>
+  <amx:popup id="p1">
+    <amx:panelGroupLayout id="pgl2">
+      <amx:outputText value="Are you sure you want to unadopt #{pageFlowScope.EditToy.newName}?" id="ot6"/>
+      <amx:commandButton text="Yes" id="cb6" action="gotoGallery" actionListener="#{pageFlowScope.EditToy.unadopt}"/>
+      <amx:commandButton text="No" id="cb7">
+        <amx:closePopupBehavior id="cpb1" popupId="p1" type="action"/>
+      </amx:commandButton>
+    </amx:panelGroupLayout>
+  </amx:popup>
 </amx:view>

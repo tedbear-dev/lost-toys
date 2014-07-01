@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import java.sql.Types;
+
 import java.util.ArrayList;
 
 import java.util.Iterator;
@@ -32,6 +34,8 @@ public class ToyList {
     }
     
     public Toy findToyById(String id){
+
+        if(id == null) return null;
 
         Toy rc = null;
         Iterator i = toys.iterator();
@@ -81,6 +85,8 @@ public class ToyList {
     
     public void addNewToy(String uuid,int major,int minor,String name,String image){
             
+        Trace.log(Utility.FrameworkLogger,Level.SEVERE,ToyList.class, "addNewToy", "image = " + image);
+        
         Connection conn = null;
         try {
             String docRoot = AdfmfJavaUtilities.getDirectoryPathRoot(AdfmfJavaUtilities.ApplicationDirectory);
@@ -92,7 +98,8 @@ public class ToyList {
             stmt.setInt(2, major);
             stmt.setInt(3, minor);
             stmt.setString(4, name);
-            stmt.setString(5, image);
+            if(image == null || image.length() == 0) stmt.setNull(5, Types.VARCHAR);
+            else stmt.setString(5, image);
             stmt.executeUpdate();
             conn.commit();
             
@@ -113,4 +120,73 @@ public class ToyList {
         }
 
     }
+    
+    public void updateExistingToy(String uuid,int major,int minor,String name,String image){
+            
+        Connection conn = null;
+        try {
+            String docRoot = AdfmfJavaUtilities.getDirectoryPathRoot(AdfmfJavaUtilities.ApplicationDirectory);
+            String dbName = docRoot + "/lost-toys.db";
+
+            conn = new SQLite.JDBCDataSource("jdbc:sqlite:" + dbName).getConnection();
+            PreparedStatement stmt = conn.prepareStatement("UPDATE befriended_toys SET toy_name = ?, image_base64 = ? WHERE uuid = ? AND major = ? AND minor = ?");
+            stmt.setString(1, name);
+            if(image == null || image.length() == 0) stmt.setNull(2, Types.VARCHAR);
+            else stmt.setString(2, image);
+            stmt.setString(3, uuid);
+            stmt.setInt(4, major);
+            stmt.setInt(5, minor);
+            stmt.executeUpdate();
+            conn.commit();
+            
+            refreshToys();
+        }
+        catch (Exception e) {
+            Trace.log(Utility.FrameworkLogger,Level.SEVERE,ToyList.class, "updateExistingToy", e);
+        }
+        finally {
+            if (conn != null){
+                try{
+                    conn.close();
+                }
+                catch(Exception ex){
+                    Trace.log(Utility.FrameworkLogger,Level.SEVERE,ToyList.class, "updateExistingToy", ex);
+                }
+            }
+        }
+
+    }    
+    
+    public void deleteToy(String uuid,int major,int minor){
+            
+        Connection conn = null;
+        try {
+            String docRoot = AdfmfJavaUtilities.getDirectoryPathRoot(AdfmfJavaUtilities.ApplicationDirectory);
+            String dbName = docRoot + "/lost-toys.db";
+
+            conn = new SQLite.JDBCDataSource("jdbc:sqlite:" + dbName).getConnection();
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM befriended_toys WHERE uuid = ? AND major = ? AND minor = ?");
+            stmt.setString(1, uuid);
+            stmt.setInt(2, major);
+            stmt.setInt(3, minor);
+            stmt.executeUpdate();
+            conn.commit();
+            
+            refreshToys();
+        }
+        catch (Exception e) {
+            Trace.log(Utility.FrameworkLogger,Level.SEVERE,ToyList.class, "deleteToy", e);
+        }
+        finally {
+            if (conn != null){
+                try{
+                    conn.close();
+                }
+                catch(Exception ex){
+                    Trace.log(Utility.FrameworkLogger,Level.SEVERE,ToyList.class, "deleteToy", ex);
+                }
+            }
+        }
+
+    }    
 }

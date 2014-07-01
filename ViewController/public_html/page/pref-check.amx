@@ -6,7 +6,7 @@
       <amx:outputText value="Preferences" id="ot1"/>
     </amx:facet>
     <amx:facet name="secondary">
-      <amx:commandButton id="cb2" text="Next" action="gotoToyGallery"/> 
+      <amx:commandButton id="cb2" text="Start" action="gotoToyGallery"/> 
     </amx:facet>
     <amx:panelFormLayout id="pfl1">
       <amx:panelLabelAndMessage label="Hug Proximity" id="plam1">
@@ -22,7 +22,7 @@
         <amx:outputText value="#{preferenceScope.application.preferences.debugMode}" id="ot5"/>
       </amx:panelLabelAndMessage>
     </amx:panelFormLayout>
-    <amx:commandButton text="Vibrate?" id="cb1" action="#{viewScope.PrefCheck.vibrate}"/>
-    <amx:commandButton text="Beacons?" id="cb3" action="#{viewScope.PrefCheck.test}"/>
+    <amx:commandButton text="Vibrate?" id="cb1" action="#{pageFlowScope.PrefCheck.vibrate}"/>
+    <amx:commandButton text="Beacons?" id="cb3" action="#{pageFlowScope.PrefCheck.test}"/>
   </amx:panelPage>
 </amx:view>

@@ -15,9 +15,9 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">242.26953</property>
+         name="y">248.13672</property>
       <property
-         name="x">265.0</property>
+         name="x">408.0</property>
    </View>
    <View
       id="View3">
@@ -38,11 +38,11 @@
       islink="true"
       id="ControlFlowCase5"
       from="View2"
-      to="MethodCall17">
+      to="View3">
       <property
          name="fromOutcome">gotoToyGallery</property>
       <property
-         name="sdm:polyPoints">R50,306.0,242.20312,436.0,143.03516,L54</property>
+         name="sdm:polyPoints">R50,449.0,248.07031,606.0,143.70312,L54</property>
    </ControlFlowCase>
    <View
       id="View6">
@@ -132,17 +132,17 @@
       <property
          name="fromOutcome">yes</property>
       <property
-         name="sdm:polyPoints">R54,116.0,147.83984,224.0,242.20312,L50</property>
+         name="sdm:polyPoints">B50,259.0,195.20703,367.0,248.07031,L50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"
       id="ControlFlowCase19"
       from="Router25"
-      to="MethodCall17">
+      to="View3">
       <property
          name="fromOutcome">no</property>
       <property
-         name="sdm:polyPoints">R46,116.0,140.83984,434.79117,136.03516,L46</property>
+         name="sdm:polyPoints">R50,300.0,141.20703,604.91705,136.70312,L46</property>
    </ControlFlowCase>
    <Router
       id="Router25">
@@ -155,31 +155,8 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">144.40625</property>
+         name="y">141.27344</property>
       <property
-         name="x">75.0</property>
+         name="x">259.0</property>
    </Router>
-   <MethodCall
-      id="MethodCall17">
-      <property
-         name="activityId">init-beacons</property>
-      <property
-         name="description">&lt;html>&lt;p>&lt;b>init-beacons&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
-      <property
-         name="exceptionHandler">false</property>
-      <property
-         name="y">139.60156</property>
-      <property
-         name="x">477.0</property>
-   </MethodCall>
-   <ControlFlowCase
-      islink="true"
-      id="ControlFlowCase20"
-      from="MethodCall17"
-      to="View3">
-      <property
-         name="fromOutcome">start</property>
-      <property
-         name="sdm:polyPoints">R50,518.0,139.53516,606.0,140.20312,L50</property>
-   </ControlFlowCase>
 </SDM>

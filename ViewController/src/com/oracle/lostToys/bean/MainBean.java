@@ -37,6 +37,11 @@ public class MainBean {
         Toy oldSelected = this.selected;
         this.selected = selected;
         propertyChangeSupport.firePropertyChange("selectedToy", oldSelected, selected);
+        
+        EditToyBean etb = (EditToyBean)EL.eval("pageFlowScope.EditToy");
+        if(etb != null){
+            etb.reset();
+        }
     }
 
     public Toy getSelectedToy() {
@@ -45,6 +50,8 @@ public class MainBean {
     
     public void initBeacons(){
         
+        Trace.log(Utility.FrameworkLogger,Level.SEVERE,MainBean.class, "initBeacons", "Starting up beacon ranging.");   
+                
         AdfmfContainerUtilities.invokeContainerJavaScriptFunction(
             "com.oracle.lostToys.main",
             "window.beaconPlugin.defineClasses",
@@ -65,8 +72,6 @@ public class MainBean {
                 (device.indexOf("Simulator") >= 0) ? Boolean.TRUE : Boolean.FALSE // Is this the simulator? If so, use fake data
             }
         );
-
-        Trace.log(Utility.FrameworkLogger,Level.SEVERE,MainBean.class, "initBeacons", "defineClasses");    
     }
     
     public Beacon getSelectedBeacon(){
@@ -74,10 +79,14 @@ public class MainBean {
         if(selected == null) return null;
         if(beacons == null || beacons.isEmpty()) return null;
 
+        // Trace.log(Utility.FrameworkLogger,Level.SEVERE,MainBean.class, "getSelectedBeacon", "selected = " + selected.getUuid() + ", " + selected.getMajor() + "." + selected.getMinor());   
+        
         Iterator i = beacons.iterator();
         while(i.hasNext()){
             Beacon b = (Beacon)i.next();
 
+            // Trace.log(Utility.FrameworkLogger,Level.SEVERE,MainBean.class, "getSelectedBeacon", "beacon = " + b.getProximityUUID() + ", " + b.getMajor() + "." + b.getMinor());   
+            
             if(b.getProximityUUID().equals(selected.getUuid()) && b.getMajor() == selected.getMajor() && b.getMinor() == selected.getMinor()){ 
                 return b;
             }
@@ -99,9 +108,14 @@ public class MainBean {
     public void endBeaconUpdate(){
         propertyChangeSupport.firePropertyChange("beacons", null, beacons);
         
-        FindFriendBean ffb = (FindFriendBean)EL.eval("viewScope.FindFriend");
+        FindFriendBean ffb = (FindFriendBean)EL.eval("pageFlowScope.FindFriend");
         if(ffb != null){
             ffb.update();
+        }
+        
+        EditToyBean etb = (EditToyBean)EL.eval("pageFlowScope.EditToy");
+        if(etb != null){
+            etb.update();
         }
     }
 

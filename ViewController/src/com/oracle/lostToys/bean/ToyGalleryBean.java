@@ -49,11 +49,15 @@ public class ToyGalleryBean {
 
     public ToyGalleryBean() {
         super();
+        
+        MainBean main = (MainBean)EL.eval("applicationScope.Main");
+        if(main != null){
+            main.initBeacons();
+        }
     }
     
-    public String selectToy() {
+    public void selectToy(ActionEvent evt) {
         
         EL.set("applicationScope.Main.selectedToy", EL.exec("findToyById"));        
-        return "gotoFindFriend";
     }
 }

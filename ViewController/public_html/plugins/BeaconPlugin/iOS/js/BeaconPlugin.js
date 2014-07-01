@@ -23,9 +23,9 @@ window.beaconPlugin = {
             window.beaconPlugin.updater = setInterval(function(){
             
                 window.beaconPlugin.refreshBeacons([
-                    {"major":58823,"minor":47846,"rssi":Math.round(Math.random()*50.0) - 50,"accuracy":Math.random() * 3.0,"proximityUUID":proximityUUID,"proximity":1},
-                    {"major":41922,"minor":29992,"rssi":Math.round(Math.random()*50.0) - 75,"accuracy":Math.random() * 3.0,"proximityUUID":proximityUUID,"proximity":2},
-                    {"major":28028,"minor":4937,"rssi":Math.round(Math.random()*50.0) - 100,"accuracy":Math.random() * 3.0,"proximityUUID":proximityUUID,"proximity":3}
+                    {"major":58823,"minor":47846,"rssi":Math.round(Math.random()*50.0) - 50,"accuracy":Math.random() * 10.0,"proximityUUID":proximityUUID,"proximity":1},
+                    {"major":41922,"minor":29992,"rssi":Math.round(Math.random()*50.0) - 75,"accuracy":Math.random() * 20.0,"proximityUUID":proximityUUID,"proximity":2},
+                    {"major":28028,"minor":4937,"rssi":Math.round(Math.random()*50.0) - 100,"accuracy":Math.random() * 30.0,"proximityUUID":proximityUUID,"proximity":3}
                 ],regionID); 
                 
             },1000);           
