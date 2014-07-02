@@ -2,33 +2,38 @@
 <adfc-mobile-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.0">
   <task-flow-definition id="main-task-flow">
     <default-activity>show-prefs</default-activity>
-    <managed-bean id="__1">
-      <managed-bean-name>PrefCheck</managed-bean-name>
-      <managed-bean-class>com.oracle.lostToys.bean.PrefCheckBean</managed-bean-class>
-      <managed-bean-scope>pageFlow</managed-bean-scope>
-    </managed-bean>
-    <managed-bean id="__5">
-      <managed-bean-name>ToyGallery</managed-bean-name>
-      <managed-bean-class>com.oracle.lostToys.bean.ToyGalleryBean</managed-bean-class>
-      <managed-bean-scope>pageFlow</managed-bean-scope>
-    </managed-bean>
-    <managed-bean id="__8">
-      <managed-bean-name>EditToy</managed-bean-name>
-      <managed-bean-class>com.oracle.lostToys.bean.EditToyBean</managed-bean-class>
-      <managed-bean-scope>pageFlow</managed-bean-scope>
-    </managed-bean>
     <managed-bean id="__21">
       <managed-bean-name>Main</managed-bean-name>
       <managed-bean-class>com.oracle.lostToys.bean.MainBean</managed-bean-class>
       <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
-    <managed-bean id="__14">
-      <managed-bean-name>FindFriend</managed-bean-name>
-      <managed-bean-class>com.oracle.lostToys.bean.FindFriendBean</managed-bean-class>
+    <managed-bean id="__5">
+      <managed-bean-name>preferences</managed-bean-name>
+      <managed-bean-class>com.oracle.lostToys.bean.PreferencesBean</managed-bean-class>
       <managed-bean-scope>pageFlow</managed-bean-scope>
     </managed-bean>
+    <managed-bean id="__8">
+      <managed-bean-name>beaconPlugin</managed-bean-name>
+      <managed-bean-class>com.oracle.lostToys.bean.BeaconPluginBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__14">
+      <managed-bean-name>toyGallery</managed-bean-name>
+      <managed-bean-class>com.oracle.lostToys.bean.ToyGalleryBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__15">
+      <managed-bean-name>editToy</managed-bean-name>
+      <managed-bean-class>com.oracle.lostToys.bean.EditToyBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__16">
+      <managed-bean-name>findToy</managed-bean-name>
+      <managed-bean-class>com.oracle.lostToys.bean.FindToyBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
     <view id="pref-check">
-      <page>/page/pref-check.amx</page>
+      <page>/page/show-preferences.amx</page>
     </view>
     <view id="toy-gallery">
       <page>/page/toy-gallery.amx</page>
@@ -37,11 +42,11 @@
       <page>/page/edit-toy.amx</page>
     </view>
     <view id="find-friend">
-      <page>/page/find-friend.amx</page>
+      <page>/page/find-toy.amx</page>
     </view>
     <router id="show-prefs">
       <case id="__22">
-        <expression>#{applicationScope.Main.debug}</expression>
+        <expression>#{applicationScope.Main.preferences.debug}</expression>
         <outcome>yes</outcome>
       </case>
       <default-outcome>no</default-outcome>

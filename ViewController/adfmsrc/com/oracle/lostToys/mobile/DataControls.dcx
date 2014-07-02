@@ -8,8 +8,9 @@
                       BeanClass="com.oracle.lostToys.data.ToyList" xmlns="http://xmlns.oracle.com/adfm/datacontrol">
     <Source>
       <bean-definition BeanClass="com.oracle.lostToys.data.ToyList"
-                       DataControlHandler="oracle.adf.model.adapter.bean.DataFilterHandler" AccessMode="scrollable"
-                       EagerPersist="false" xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+                       DataControlHandler="oracle.adf.model.adapter.bean.BeanDCHandler" EagerPersist="false"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
     </Source>
   </AdapterDataControl>
 </DataControlConfigs>
+

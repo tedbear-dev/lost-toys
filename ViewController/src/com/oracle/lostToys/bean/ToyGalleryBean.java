@@ -5,6 +5,8 @@ import com.oracle.lostToys.data.Toy;
 
 import com.oracle.lostToys.EL;
 
+import com.oracle.lostToys.beacon.BeaconPlugin;
+
 import com.sun.util.logging.Level;
 
 import com.sun.util.logging.Logger;
@@ -47,17 +49,45 @@ import oracle.adfmf.util.logging.Trace;
 
 public class ToyGalleryBean {
 
+    private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+    
+    String selectedToyId;
+    
     public ToyGalleryBean() {
         super();
         
-        MainBean main = (MainBean)EL.eval("applicationScope.Main");
-        if(main != null){
-            main.initBeacons();
-        }
+        setSelectedToyId(null);
+        BeaconPlugin.startMonitoring();
     }
     
-    public void selectToy(ActionEvent evt) {
+    public void setSelectedToyId(String id){
+
+        String oldId = id;
+        selectedToyId = id;
+
+        if(EL.exists("findToyById")){
+            EL.main().setSelectedToy((Toy)EL.exec("findToyById",new String[]{"id"},new Object[]{selectedToyId}));     
+        }
         
-        EL.set("applicationScope.Main.selectedToy", EL.exec("findToyById"));        
+        propertyChangeSupport.firePropertyChange("selectedToyId", oldId, selectedToyId);
+    }
+    
+    public String getSelectedToyId(){
+        return selectedToyId;
+    }
+    
+    public void addPropertyChangeListener(PropertyChangeListener l) {
+        propertyChangeSupport.addPropertyChangeListener(l);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener l) {
+        propertyChangeSupport.removePropertyChangeListener(l);
+    }
+
+    public void beforeNewToy(ActionEvent actionEvent) {
+        
+        EL.set("viewScope.toyGallery.selectedToyId",null);
+        EL.set("pageFlowScope.editToy.nearby",Boolean.FALSE);
+        EL.set("pageFlowScope.editToy.toyId",null);
     }
 }

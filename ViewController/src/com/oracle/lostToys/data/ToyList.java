@@ -16,16 +16,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import oracle.adfmf.framework.api.AdfmfJavaUtilities;
+import oracle.adfmf.java.beans.ProviderChangeListener;
+import oracle.adfmf.java.beans.ProviderChangeSupport;
 import oracle.adfmf.util.Utility;
 import oracle.adfmf.util.logging.Trace;
 
 public class ToyList {
     
+    private ProviderChangeSupport providerChangeSupport = new ProviderChangeSupport(this);
+        
     private ArrayList toys;
     
     public ToyList() {
         super();
         refreshToys();
+    }
+    
+    public ArrayList getToyList(){
+        return toys;
     }
     
     public Toy[] getToys(){
@@ -81,11 +89,12 @@ public class ToyList {
                 }
             }
         }
+        
+        providerChangeSupport.fireProviderRefresh("toys");
+        AdfmfJavaUtilities.flushDataChangeEvent();
     }
     
     public void addNewToy(String uuid,int major,int minor,String name,String image){
-            
-        Trace.log(Utility.FrameworkLogger,Level.SEVERE,ToyList.class, "addNewToy", "image = " + image);
         
         Connection conn = null;
         try {
@@ -189,4 +198,12 @@ public class ToyList {
         }
 
     }    
+    
+    public void addProviderChangeListener(ProviderChangeListener l){
+        providerChangeSupport.addProviderChangeListener(l);
+    }
+    
+    public void removeProviderChangeListener(ProviderChangeListener l){
+        providerChangeSupport.removeProviderChangeListener(l);
+    }
 }

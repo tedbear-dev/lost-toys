@@ -73,9 +73,18 @@ public class Toy {
     }
 
     public void setImage(String image) {
-        String oldImage = this.image;
-        this.image = image;
-        propertyChangeSupport.firePropertyChange("image", oldImage, image);
+        String oldImage = getImage();
+        
+        String pic = null;
+        if(image == null) pic = null;
+        else{
+            if(image.indexOf("data:image/gif;base64,") == 0) pic = image.substring(image.indexOf(',')+1);
+            else if (image.indexOf("/img/teddybear-blank.png") == 0) pic = null;
+            else pic = image;
+        }
+        this.image = pic;
+        
+        propertyChangeSupport.firePropertyChange("image", oldImage, getImage());
     }
 
     public String getImage() {
@@ -90,13 +99,13 @@ public class Toy {
     public Toy(String name,String image,int major,int minor,String uuid) {
         super();
         
-        this.name = name;
-        this.image = image;
-        this.minor = minor;
-        this.major = major;
-        this.uuid = uuid;
+        setName(name);
+        setImage(image);
+        setMinor(minor);
+        setMajor(major);
+        setUuid(uuid);
         
-        this.id = this.major+"."+this.minor;
+        setId(this.major+"."+this.minor);
     }
     
     public void addPropertyChangeListener(PropertyChangeListener l) {

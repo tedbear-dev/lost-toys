@@ -3,21 +3,21 @@
                 Package="com.oracle.lostToys.mobile.pageDefs">
   <parameters/>
   <executables>
-    <variableIterator id="variables">
+    <variableIterator id="variables" Refresh="always">
       <variable Type="java.lang.String" Name="addNewToy_uuid" IsQueriable="false"/>
       <variable Type="int" Name="addNewToy_major" IsQueriable="false"/>
       <variable Type="int" Name="addNewToy_minor" IsQueriable="false"/>
       <variable Type="java.lang.String" Name="addNewToy_name" IsQueriable="false"/>
       <variable Type="java.lang.String" Name="addNewToy_image" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="deleteToy_uuid" IsQueriable="false"/>
+      <variable Type="int" Name="deleteToy_major" IsQueriable="false"/>
+      <variable Type="int" Name="deleteToy_minor" IsQueriable="false"/>
       <variable Type="java.lang.String" Name="updateExistingToy_uuid" IsQueriable="false"/>
       <variable Type="int" Name="updateExistingToy_major" IsQueriable="false"/>
       <variable Type="int" Name="updateExistingToy_minor" IsQueriable="false"/>
       <variable Type="java.lang.String" Name="updateExistingToy_name" IsQueriable="false"/>
       <variable Type="java.lang.String" Name="updateExistingToy_image" IsQueriable="false"/>
       <variable Type="java.lang.String" Name="findToyById_id" IsQueriable="false"/>
-      <variable Type="java.lang.String" Name="deleteToy_uuid" IsQueriable="false"/>
-      <variable Type="int" Name="deleteToy_major" IsQueriable="false"/>
-      <variable Type="int" Name="deleteToy_minor" IsQueriable="false"/>
     </variableIterator>
     <methodIterator Binds="findToyById.result" DataControl="ToyList" RangeSize="25"
                     BeanClass="com.oracle.lostToys.data.Toy" id="findToyByIdIterator"/>
@@ -25,12 +25,58 @@
   <bindings>
     <methodAction id="addNewToy" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addNewToy"
                   IsViewObjectMethod="false" DataControl="ToyList" InstanceName="data.ToyList.dataProvider">
-      <NamedData NDName="uuid" NDValue="#{bindings.addNewToy_uuid}" NDType="java.lang.String"/>
-      <NamedData NDName="major" NDValue="#{bindings.addNewToy_major}" NDType="int"/>
-      <NamedData NDName="minor" NDValue="#{bindings.addNewToy_minor}" NDType="int"/>
-      <NamedData NDName="name" NDValue="#{bindings.addNewToy_name}" NDType="java.lang.String"/>
-      <NamedData NDName="image" NDValue="#{bindings.addNewToy_image}" NDType="java.lang.String"/>
+      <NamedData NDName="uuid" NDType="java.lang.String" NDValue="${bindings.addNewToy_uuid}"/>
+      <NamedData NDName="major" NDType="int" NDValue="${bindings.addNewToy_major}"/>
+      <NamedData NDName="minor" NDType="int" NDValue="${bindings.addNewToy_minor}"/>
+      <NamedData NDName="name" NDType="java.lang.String" NDValue="${bindings.addNewToy_name}"/>
+      <NamedData NDName="image" NDType="java.lang.String" NDValue="${bindings.addNewToy_image}"/>
     </methodAction>
+    <attributeValues IterBinding="variables" id="uuid">
+      <AttrNames>
+        <Item Value="addNewToy_uuid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="major">
+      <AttrNames>
+        <Item Value="addNewToy_major"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="minor">
+      <AttrNames>
+        <Item Value="addNewToy_minor"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="name">
+      <AttrNames>
+        <Item Value="addNewToy_name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="image">
+      <AttrNames>
+        <Item Value="addNewToy_image"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="deleteToy" RequiresUpdateModel="true" Action="invokeMethod" MethodName="deleteToy"
+                  IsViewObjectMethod="false" DataControl="ToyList" InstanceName="data.ToyList.dataProvider">
+      <NamedData NDName="uuid" NDType="java.lang.String" NDValue="${bindings.deleteToy_uuid}"/>
+      <NamedData NDName="major" NDType="int" NDValue="${bindings.deleteToy_major}"/>
+      <NamedData NDName="minor" NDType="int" NDValue="${bindings.deleteToy_minor}"/>
+    </methodAction>
+    <attributeValues IterBinding="variables" id="uuid1">
+      <AttrNames>
+        <Item Value="deleteToy_uuid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="major1">
+      <AttrNames>
+        <Item Value="deleteToy_major"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="minor1">
+      <AttrNames>
+        <Item Value="deleteToy_minor"/>
+      </AttrNames>
+    </attributeValues>
     <methodAction id="updateExistingToy" RequiresUpdateModel="true" Action="invokeMethod" MethodName="updateExistingToy"
                   IsViewObjectMethod="false" DataControl="ToyList" InstanceName="data.ToyList.dataProvider">
       <NamedData NDName="uuid" NDType="java.lang.String" NDValue="${bindings.updateExistingToy_uuid}"/>
@@ -39,16 +85,40 @@
       <NamedData NDName="name" NDType="java.lang.String" NDValue="${bindings.updateExistingToy_name}"/>
       <NamedData NDName="image" NDType="java.lang.String" NDValue="${bindings.updateExistingToy_image}"/>
     </methodAction>
+    <attributeValues IterBinding="variables" id="uuid2">
+      <AttrNames>
+        <Item Value="updateExistingToy_uuid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="major2">
+      <AttrNames>
+        <Item Value="updateExistingToy_major"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="minor2">
+      <AttrNames>
+        <Item Value="updateExistingToy_minor"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="name1">
+      <AttrNames>
+        <Item Value="updateExistingToy_name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="image1">
+      <AttrNames>
+        <Item Value="updateExistingToy_image"/>
+      </AttrNames>
+    </attributeValues>
     <methodAction id="findToyById" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findToyById"
                   IsViewObjectMethod="false" DataControl="ToyList" InstanceName="data.ToyList.dataProvider"
                   ReturnName="data.ToyList.methodResults.findToyById_ToyList_dataProvider_findToyById_result">
       <NamedData NDName="id" NDType="java.lang.String" NDValue="${bindings.findToyById_id}"/>
     </methodAction>
-    <methodAction id="deleteToy" RequiresUpdateModel="true" Action="invokeMethod" MethodName="deleteToy"
-                  IsViewObjectMethod="false" DataControl="ToyList" InstanceName="data.ToyList.dataProvider">
-      <NamedData NDName="uuid" NDType="java.lang.String" NDValue="${bindings.deleteToy_uuid}"/>
-      <NamedData NDName="major" NDType="int" NDValue="${bindings.deleteToy_major}"/>
-      <NamedData NDName="minor" NDType="int" NDValue="${bindings.deleteToy_minor}"/>
-    </methodAction>
+    <attributeValues IterBinding="variables" id="id">
+      <AttrNames>
+        <Item Value="findToyById_id"/>
+      </AttrNames>
+    </attributeValues>
   </bindings>
 </pageDefinition>

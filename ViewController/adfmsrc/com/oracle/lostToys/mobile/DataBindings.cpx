@@ -4,15 +4,19 @@
   <pageMap>
     <page path="/page/toy-gallery.amx" usageId="com_oracle_lostToys_mobile_toy_galleryPageDef"/>
     <page path="/page/edit-toy.amx" usageId="com_oracle_lostToys_mobile_maintain_toyPageDef"/>
+    <page path="/page/find-toy.amx" usageId="com_oracle_lostToys_mobile_find_toyPageDef"/>
+    <page path="/page/show-preferences.amx" usageId="com_oracle_lostToys_mobile_show_preferencesPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="com_oracle_lostToys_mobile_toy_galleryPageDef"
           path="com.oracle.lostToys.mobile.pageDefs.toy_galleryPageDef"/>
     <page id="com_oracle_lostToys_mobile_maintain_toyPageDef"
           path="com.oracle.lostToys.mobile.pageDefs.edit_toyPageDef"/>
+    <page id="com_oracle_lostToys_mobile_find_toyPageDef" path="com.oracle.lostToys.mobile.pageDefs.find_toyPageDef"/>
+    <page id="com_oracle_lostToys_mobile_show_preferencesPageDef"
+          path="com.oracle.lostToys.mobile.pageDefs.show_preferencesPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <dc id="ToyList" path="com.oracle.lostToys.mobile.ToyList"/>
-    <dc id="ToyListDC" path="com.oracle.lostToys.mobile.ToyListDC"/>
   </dataControlUsages>
 </Application>

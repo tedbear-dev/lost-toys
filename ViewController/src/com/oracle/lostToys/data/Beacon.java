@@ -1,4 +1,4 @@
-package com.oracle.lostToys.beacon;
+package com.oracle.lostToys.data;
 
 public class Beacon {
 

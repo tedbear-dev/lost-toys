@@ -1,30 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.16.21" id="toy_galleryPageDef"
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.9.1" id="find_toyPageDef"
                 Package="com.oracle.lostToys.mobile.pageDefs">
   <parameters/>
   <executables>
-    <iterator Binds="root" RangeSize="25" DataControl="ToyList" id="ToyListIterator"/>
-    <accessorIterator MasterBinding="ToyListIterator" Binds="toys" RangeSize="25" DataControl="ToyList"
-                      BeanClass="com.oracle.lostToys.data.Toy" id="toysIterator"/>
-    <methodIterator Binds="findToyById.result" DataControl="ToyList" RangeSize="25"
-                    BeanClass="com.oracle.lostToys.data.Toy" id="findToyByIdIterator"/>
     <variableIterator id="variables" Refresh="always">
       <variable Type="java.lang.String" Name="findToyById_id" IsQueriable="false"/>
     </variableIterator>
+    <methodIterator Binds="findToyById.result" DataControl="ToyList" RangeSize="25"
+                    BeanClass="com.oracle.lostToys.data.Toy" id="findToyByIdIterator"/>
   </executables>
   <bindings>
-    <tree IterBinding="toysIterator" id="toys">
-      <nodeDefinition DefName="com.oracle.lostToys.data.Toy" Name="toys0">
-        <AttrNames>
-          <Item Value="uuid"/>
-          <Item Value="major"/>
-          <Item Value="minor"/>
-          <Item Value="id"/>
-          <Item Value="name"/>
-          <Item Value="image"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
     <methodAction id="findToyById" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findToyById"
                   IsViewObjectMethod="false" DataControl="ToyList" InstanceName="data.ToyList.dataProvider"
                   ReturnName="data.ToyList.methodResults.findToyById_ToyList_dataProvider_findToyById_result">

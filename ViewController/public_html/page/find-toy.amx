@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<amx:view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amx="http://xmlns.oracle.com/adf/mf/amx"
+          xmlns:dvtm="http://xmlns.oracle.com/adf/mf/amx/dvt">
+  <amx:panelPage id="pp1">
+    <amx:facet name="header">
+      <amx:outputText value="Find Friend" id="ot1"/>
+    </amx:facet>
+    <amx:facet name="primary">
+      <amx:commandButton id="cb1" text="Stop" action="cancelFinding"/>
+    </amx:facet>
+    
+        <amx:image id="i1" source="#{applicationScope.Main.selectedToy.image}"/>
+        <amx:outputText value="#{applicationScope.Main.selectedToy.name}" id="ot5"/>
+        
+    <dvtm:dialGauge id="dialGauge1" value="#{viewScope.findToy.proximity}" minValue="#{applicationScope.Main.minProximity}" maxValue="#{applicationScope.Main.maxProximity}"
+                    background="domeAntique" indicator="needleAntique"
+                    animationOnDataChange="auto" inlineStyle="width:256px;height:256px;" rendered="#{!viewScope.findToy.found}"/>
+                       
+    <amx:panelGroupLayout id="pgl1" rendered="#{viewScope.findToy.found}">
+      <amx:outputText value="You found me! Take a new picture of me!" id="ot3"/>
+      <amx:commandButton text="Found" id="cb3" action="foundFriend"
+                         actionListener="#{viewScope.findToy.beforeFoundFriend}"/>
+    </amx:panelGroupLayout>
+
+    <amx:panelGroupLayout id="pgl2" rendered="#{pageFlowScope.preferences.debug}">
+        <amx:outputText value="#{applicationScope.Main.selectedToy.id}" id="ot2"/>
+        <amx:outputText value="#{viewScope.findToy.proximity} -> #{pageFlowScope.preferences.hugProximity}" id="ot4"/>
+    </amx:panelGroupLayout>
+        
+  </amx:panelPage>
+</amx:view>

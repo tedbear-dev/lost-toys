@@ -2,8 +2,10 @@ package com.oracle.lostToys.bean;
 
 import com.oracle.lostToys.EL;
 
-import com.oracle.lostToys.beacon.Beacon;
+import com.oracle.lostToys.data.Beacon;
 import com.oracle.lostToys.beacon.BeaconPlugin;
+import com.oracle.lostToys.data.Name;
+import com.oracle.lostToys.data.RandomNameService;
 import com.oracle.lostToys.data.Toy;
 
 import com.sun.util.logging.Level;
@@ -37,93 +39,131 @@ public class EditToyBean {
     int newMajor = -1;
     int newMinor = -1;
     String newUuid = null;
-    boolean close = false;
+    String toyId = null;
+    boolean nearby = false;
     
     public EditToyBean() {
-        reset();
+        Trace.log(Utility.FrameworkLogger,Level.SEVERE,EditToyBean.class, "constructor", "constructing new EditToyBean"); 
     }
 
-    public void setClose(boolean close) {
-        boolean oldClose = this.close;
-        this.close = close;
-        propertyChangeSupport.firePropertyChange("close", oldClose, close);
-    }
-
-    public boolean isClose() {
-        return close;
-    }
-
-    public void reset(){
+    public void setNearby(boolean nearby){
         
-        Toy selected = (Toy)EL.eval("applicationScope.Main.selectedToy");
-        if(selected != null){
-            
-            Trace.log(Utility.FrameworkLogger,Level.SEVERE,EditToyBean.class, "reset", "setting values from selected toy: " + selected.getName());    
-            
-            newUuid = selected.getUuid();
-            setImage(selected.getImage());
-            setNewName(selected.getName());
-            setNewMajor(selected.getMajor());
-            setNewMinor(selected.getMinor());
+        Trace.log(Utility.FrameworkLogger,Level.SEVERE,EditToyBean.class, "setNearby", "setting nearby = " + nearby); 
+        
+        boolean oldNearby = this.nearby;
+        this.nearby = nearby;
+        propertyChangeSupport.firePropertyChange("nearby", oldNearby, nearby);
+    }
+    
+    public boolean isNearby(){
+        return nearby;
+    }
+    
+    public void setToyId(String toyId){
+        
+        String oldToyId = this.toyId;
+        this.toyId = toyId;
+        
+        refreshToy();
+        
+        propertyChangeSupport.firePropertyChange("toyId",oldToyId,this.toyId);
+    }
+    
+    public String getToyId(){
+        return toyId;
+    }
+    
+    public void refreshToy(){
+
+        Toy toy = (Toy)EL.exec("findToyById",new String[]{"id"},new Object[]{toyId});
+        
+        if(toy != null){
+            Trace.log(Utility.FrameworkLogger,Level.SEVERE,EditToyBean.class, "refreshToy", "setting values from selected toy: " + toy.getName());                
+
+            newUuid = toy.getUuid();
+            setImage(toy.getImage());
+            setNewName(toy.getName());
+            setNewMajor(toy.getMajor());
+            setNewMinor(toy.getMinor());
         }
         else{
-            newUuid = (String)EL.eval("preferenceScope.application.preferences.familyUUID");
+            Trace.log(Utility.FrameworkLogger,Level.SEVERE,EditToyBean.class, "refreshToy", "initializing for new toy");    
+
+            newUuid = EL.main().getPreferences().getFamilyUUID();
 
             setImage(null);
-            setNewName("No Name");
-            setNewMajor(0);
-            setNewMinor(0);
-
-            Trace.log(Utility.FrameworkLogger,Level.SEVERE,EditToyBean.class, "reset", "initializing for new toy");    
+            setNewName("New Toy");
+            
+            if(toyId == null || toyId.indexOf('.') == -1){
+                setNewMajor(0);
+                setNewMinor(0);
+            }
+            else{
+                setNewMajor(Integer.parseInt(toyId.substring(0, toyId.indexOf('.'))));
+                setNewMinor(Integer.parseInt(toyId.substring(toyId.indexOf('.')+1)));
+            }
         }
     }
 
-    public void update(){
-
-        if(isClose()) return;
+    public void lookForCloseToy(){
+    
+        if(isNearby()) return;
         
-        double hug = Integer.parseInt(EL.eval("preferenceScope.application.preferences.hugProximity").toString());
+        MainBean main = EL.main();
+        int hug = main.getPreferences().getHugProximity();
         
-        MainBean main = (MainBean)EL.eval("applicationScope.Main");
-        if(main != null){
-            ArrayList bs = main.getBeacons();
-            if(bs != null){
-                Iterator i = bs.iterator();
-                while(i.hasNext()){
-                    Beacon b = (Beacon)i.next();
-                    double acc = b.getAccuracy();
-                    if(acc < 0.0) acc = 1000.0;
-                    acc = Math.min(1000.0,Math.max(0.0,acc * 100.0)); // Accuracy in meters == distance in centimeters
-                    if(acc <= hug){
-                        BeaconPlugin.vibrate();
-                        setClose(true);
+        ArrayList bs = main.getBeacons().getBeacons();
+        Iterator i = bs.iterator();
+        while(i.hasNext()){
+            Beacon b = (Beacon)i.next();
+            int proximity = main.proximityFromAccuracy(b.getAccuracy());
+            
+            if(proximity <= hug){
 
-                        Toy t = (Toy)EL.exec("findToyById",new String[]{"id"},new Object[]{b.getMajor() + "." + b.getMinor()});
-                        if(t != null){
-                            newUuid = t.getUuid();
-                            setNewName(t.getName());
-                            setImage(t.getImage());
-                            setNewMajor(t.getMajor());
-                            setNewMinor(t.getMinor());
-                        }
-                        else{
-                            newUuid = (String)EL.eval("preferenceScope.application.preferences.familyUUID");
+                Trace.log(Utility.FrameworkLogger,Level.SEVERE,EditToyBean.class, "lookForCloseToy", "found toy at proximity " + proximity);  
 
-                            setImage(null);
-                            setNewName("No Name");
-                            setNewMajor(b.getMajor());
-                            setNewMinor(b.getMinor());
-                        }
-                        
-                        break;
-                    }
-                }
+                BeaconPlugin.vibrate();
+                setNearby(true);
+                setToyId(b.getMajor()+"."+b.getMinor());
+                break;       
             }
         }
     }
     
+    public String saveChanges(){
+        
+        Toy selected = EL.main().getSelectedToy();
+        if(selected != null){
+            EL.exec(
+                "updateExistingToy",
+                new String[]{"uuid","major","minor","name","image"},
+                new Object[]{newUuid,new Integer(newMajor),new Integer(newMinor),newName,newPicture}
+            );
+        }
+        else{
+            EL.exec(
+                "addNewToy",
+                new String[]{"uuid","major","minor","name","image"},
+                new Object[]{newUuid,new Integer(newMajor),new Integer(newMinor),newName,newPicture}
+            );
+        }
+        
+        return "gotoGallery";
+    }
+
+    public void unadopt(ActionEvent actionEvent) {
+        EL.exec(
+            "deleteToy",
+            new String[]{"uuid","major","minor"},
+            new Object[]{newUuid,new Integer(newMajor),new Integer(newMinor)}
+        );
+    }
+
     public void setNewName(String newName) {
+        
+        String oldNewName = this.newName;
         this.newName = newName;
+        propertyChangeSupport.firePropertyChange("newName", oldNewName, this.newName);         
     }
 
     public String getNewName() {
@@ -204,28 +244,7 @@ public class EditToyBean {
     public void takePicture(ActionEvent evt) {     
         setImage(getPicture(DeviceManager.CAMERA_SOURCETYPE_CAMERA));
     }
-    
-    public String saveChanges(){
         
-        Toy selected = (Toy)EL.eval("applicationScope.Main.selectedToy");
-        if(selected != null){
-            EL.exec(
-                "updateExistingToy",
-                new String[]{"uuid","major","minor","name","image"},
-                new Object[]{newUuid,new Integer(newMajor),new Integer(newMinor),newName,newPicture}
-            );
-        }
-        else{
-            EL.exec(
-                "addNewToy",
-                new String[]{"uuid","major","minor","name","image"},
-                new Object[]{newUuid,new Integer(newMajor),new Integer(newMinor),newName,newPicture}
-            );
-        }
-        
-        return "gotoGallery";
-    }
-    
     public void addPropertyChangeListener(PropertyChangeListener l) {
         propertyChangeSupport.addPropertyChangeListener(l);
     }
@@ -234,11 +253,21 @@ public class EditToyBean {
         propertyChangeSupport.removePropertyChangeListener(l);
     }
 
-    public void unadopt(ActionEvent actionEvent) {
-        EL.exec(
-            "deleteToy",
-            new String[]{"uuid","major","minor"},
-            new Object[]{newUuid,new Integer(newMajor),new Integer(newMinor)}
-        );
+    public String generateGirlName() {
+    
+        Name name = RandomNameService.get();
+        
+        setNewName(name.getAdjective()+" "+name.getGirlName());
+    
+        return null;
+    }
+    
+    public String generateBoyName() {
+    
+        Name name = RandomNameService.get();
+        
+        setNewName(name.getAdjective()+" "+name.getBoyName());
+    
+        return null;
     }
 }

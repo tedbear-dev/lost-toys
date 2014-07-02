@@ -10,19 +10,19 @@
     </amx:facet>
     <amx:panelFormLayout id="pfl1">
       <amx:panelLabelAndMessage label="Hug Proximity" id="plam1">
-        <amx:outputText value="#{preferenceScope.application.preferences.hugProximity}" id="ot2"/>
+        <amx:outputText value="#{applicationScope.Main.preferences.hugProximity}" id="ot2"/>
       </amx:panelLabelAndMessage>
       <amx:panelLabelAndMessage label="Family UUID" id="plam2">
-        <amx:outputText value="#{preferenceScope.application.preferences.familyUUID}" id="ot3"/>
+        <amx:outputText value="#{applicationScope.Main.preferences.familyUUID}" id="ot3"/>
       </amx:panelLabelAndMessage>
       <amx:panelLabelAndMessage label="Sound ID" id="plam3">
-        <amx:outputText value="#{preferenceScope.application.preferences.soundID}" id="ot4"/>
+        <amx:outputText value="#{applicationScope.Main.preferences.soundID}" id="ot4"/>
       </amx:panelLabelAndMessage>
       <amx:panelLabelAndMessage label="Debug?" id="plam4">
-        <amx:outputText value="#{preferenceScope.application.preferences.debugMode}" id="ot5"/>
+        <amx:outputText value="#{applicationScope.Main.preferences.debug}" id="ot5"/>
       </amx:panelLabelAndMessage>
     </amx:panelFormLayout>
-    <amx:commandButton text="Vibrate?" id="cb1" action="#{pageFlowScope.PrefCheck.vibrate}"/>
-    <amx:commandButton text="Beacons?" id="cb3" action="#{pageFlowScope.PrefCheck.test}"/>
+    <amx:commandButton text="Vibrate?" id="cb1" action="#{applicationScope.Main.beaconPluginVibrate}"/>
+    <amx:commandButton text="Beacons?" id="cb3" action="#{applicationScope.Main.beaconPluginTest}"/>
   </amx:panelPage>
 </amx:view>

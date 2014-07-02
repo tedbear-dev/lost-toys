@@ -7,7 +7,7 @@
       <property
          name="activityId">pref-check</property>
       <property
-         name="page">/page/pref-check.amx</property>
+         name="page">/page/show-preferences.amx</property>
       <property
          name="start">false</property>
       <property
@@ -84,7 +84,7 @@
       <property
          name="activityId">find-friend</property>
       <property
-         name="page">/page/find-friend.amx</property>
+         name="page">/page/find-toy.amx</property>
       <property
          name="description">&lt;html>&lt;p>&lt;b>find-friend&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
       <property

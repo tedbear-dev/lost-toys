@@ -9,19 +9,21 @@
       <amx:carousel id="c1" value="#{bindings.toys.collectionModel}" var="item" controlArea="none">
         <amx:facet name="nodeStamp">
           <amx:carouselItem text="#{item.name}" id="ci1">
-            <amx:commandLink id="cl1" action="gotoFindFriend" actionListener="#{pageFlowScope.ToyGallery.selectToy}">
+            <amx:commandLink id="cl1" action="gotoFindFriend">
               <amx:image id="i1" source="#{item.image}"/>
-              <amx:setPropertyListener id="spl1" from="#{false}" to="#{pageFlowScope.FindFriend.found}"/>
-              <amx:setPropertyListener id="spl4" from="#{item.id}" to="#{bindings.findToyById_id}" type="action"/>
+              <amx:setPropertyListener id="spl1" from="#{applicationScope.Main.FALSE}" to="#{viewScope.findToy.found}" type="action"/>
+              <amx:setPropertyListener id="spl4" from="#{item.id}" to="#{viewScope.toyGallery.selectedToyId}" type="action"/>
             </amx:commandLink>
           </amx:carouselItem>
         </amx:facet>
       </amx:carousel>
       <amx:outputText value="Tap one of your adopted Lost Toys to find them. Or tap below to adopt a new Lost Toy." id="ot2"/>
-      <amx:commandButton text="Adopt" id="cb1" action="newToy" actionListener="#{pageFlowScope.ToyGallery.selectToy}">
-        <amx:setPropertyListener id="spl2" from="#{false}" to="#{pageFlowScope.EditToy.close}"/>
-        <amx:setPropertyListener id="spl3" from="#{null}" to="#{bindings.findToyById_id}"/>
-      </amx:commandButton>
+      <amx:commandButton text="Adopt" id="cb1" action="newToy" actionListener="#{viewScope.toyGallery.beforeNewToy}"/>
     </amx:panelGroupLayout>
+
+    <amx:panelGroupLayout id="pgl2" rendered="#{pageFlowScope.preferences.debug}">
+        <amx:outputText value="Current toy ID = #{pageFlowScope.editToy.toyId}" id="ot3"/>
+    </amx:panelGroupLayout>
+
   </amx:panelPage>
 </amx:view>

@@ -2,6 +2,7 @@ package com.oracle.lostToys.beacon;
 
 import com.oracle.lostToys.EL;
 import com.oracle.lostToys.bean.MainBean;
+import com.oracle.lostToys.data.Beacon;
 
 public class BeaconListCallback {
     
@@ -10,15 +11,14 @@ public class BeaconListCallback {
     }
     
     public void startUpdate(){
-
-        ((MainBean)(EL.eval("applicationScope.Main"))).startBeaconUpdate();
+        EL.main().getBeacons().startBeaconUpdate();
     }
     
     public void add(Beacon beacon){
-        ((MainBean)(EL.eval("applicationScope.Main"))).addBeacon(beacon);
+        EL.main().getBeacons().addBeacon(beacon);
     }
     
     public void endUpdate(){
-        ((MainBean)(EL.eval("applicationScope.Main"))).endBeaconUpdate();
+        EL.main().getBeacons().endBeaconUpdate();
     }
 }
