@@ -125,6 +125,8 @@ public class EditToyBean {
                 BeaconPlugin.vibrate();
                 setNearby(true);
                 setToyId(b.getMajor()+"."+b.getMinor());
+                
+                EL.main().setSelectedToy((Toy)EL.exec("findToyById",new String[]{"id"},new Object[]{getToyId()}));
                 break;       
             }
         }

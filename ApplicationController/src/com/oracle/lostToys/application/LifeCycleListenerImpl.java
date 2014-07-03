@@ -137,7 +137,7 @@ public class LifeCycleListenerImpl implements LifeCycleListener
   public void start()
   {
     try {
-       initializeDatabaseFromScript();
+       // initializeDatabaseFromScript();
     }
     catch (Exception e) {
        Trace.log(Utility.FrameworkLogger,

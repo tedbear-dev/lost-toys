@@ -114,6 +114,16 @@
                   </hash>
                </list>
             </hash>
+            <hash n="iosDeploymentOptions">
+               <value n="debugFlag" v="false"/>
+               <value n="iPadOrientationLandscapeLeft" v="false"/>
+               <value n="iPadOrientationLandscapeRight" v="false"/>
+               <value n="iPadOrientationPortrait" v="false"/>
+               <value n="iPadOrientationPortraitUpsideDown" v="false"/>
+               <value n="iPhoneOrientationLandscapeLeft" v="false"/>
+               <value n="iPhoneOrientationLandscapeRight" v="false"/>
+               <value n="iPhoneOrientationPortraitUpsideDown" v="false"/>
+            </hash>
             <url n="jarURL" path="deploy/iOS1/iOS1.jar/"/>
             <hash n="mnfImageOptions">
                <list n="deviceTypes">

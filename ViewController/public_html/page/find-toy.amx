@@ -2,30 +2,39 @@
 <amx:view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amx="http://xmlns.oracle.com/adf/mf/amx"
           xmlns:dvtm="http://xmlns.oracle.com/adf/mf/amx/dvt">
   <amx:panelPage id="pp1">
-    <amx:facet name="header">
-      <amx:outputText value="Find Friend" id="ot1"/>
-    </amx:facet>
-    <amx:facet name="primary">
-      <amx:commandButton id="cb1" text="Stop" action="cancelFinding"/>
-    </amx:facet>
     
-        <amx:image id="i1" source="#{applicationScope.Main.selectedToy.image}"/>
+    <amx:panelGroupLayout id="pgl3" halign="center">
+    <amx:spacer id="s1" height="10" width="10"/>
+        <amx:image id="i1" source="#{applicationScope.Main.selectedToy.image}" inlineStyle="width:200px;height:200px;"/>
         <amx:outputText value="#{applicationScope.Main.selectedToy.name}" id="ot5"/>
         
     <dvtm:dialGauge id="dialGauge1" value="#{viewScope.findToy.proximity}" minValue="#{applicationScope.Main.minProximity}" maxValue="#{applicationScope.Main.maxProximity}"
                     background="domeAntique" indicator="needleAntique"
-                    animationOnDataChange="auto" inlineStyle="width:256px;height:256px;" rendered="#{!viewScope.findToy.found}"/>
-                       
-    <amx:panelGroupLayout id="pgl1" rendered="#{viewScope.findToy.found}">
-      <amx:outputText value="You found me! Take a new picture of me!" id="ot3"/>
-      <amx:commandButton text="Found" id="cb3" action="foundFriend"
-                         actionListener="#{viewScope.findToy.beforeFoundFriend}"/>
+                    animationOnDataChange="auto" inlineStyle="width:200px;height:200px;" rendered="#{!viewScope.findToy.found}"/>
     </amx:panelGroupLayout>
+                       
+    <amx:tableLayout id="pgl1" rendered="#{viewScope.findToy.found}" inlineStyle="margin-top:20px;">
+      <amx:rowLayout id="rl1">
+        <amx:cellFormat id="cf1"><amx:image id="i2" source="/img/favorits.png" inlineStyle="height:64px; width:64px;"/>
+      </amx:cellFormat>
+        <amx:cellFormat id="cf2">
+      <amx:outputText value="You found me!" id="ot3" inlineStyle="padding-left:10px;font-size:large; font-weight:bold;"/>
+      <amx:commandButton text="Take my picture, rename me!" id="cb3" action="foundFriend"
+                         actionListener="#{viewScope.findToy.beforeFoundFriend}"
+                         iconPosition="trailing"/>
+        </amx:cellFormat>
+      </amx:rowLayout>
+    </amx:tableLayout>
 
     <amx:panelGroupLayout id="pgl2" rendered="#{pageFlowScope.preferences.debug}">
         <amx:outputText value="#{applicationScope.Main.selectedToy.id}" id="ot2"/>
         <amx:outputText value="#{viewScope.findToy.proximity} -> #{pageFlowScope.preferences.hugProximity}" id="ot4"/>
     </amx:panelGroupLayout>
-        
+    <amx:facet name="header">
+      <amx:outputText value="Find Me!" id="ot1"/>
+    </amx:facet>
+        <amx:facet name="secondary">
+          <amx:commandButton id="cb1" text="Give Up" action="cancelFinding" rendered="#{!viewScope.findToy.found}"/>
+    </amx:facet>
   </amx:panelPage>
 </amx:view>

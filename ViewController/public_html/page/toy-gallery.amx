@@ -2,28 +2,56 @@
 <amx:view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amx="http://xmlns.oracle.com/adf/mf/amx"
           xmlns:dvtm="http://xmlns.oracle.com/adf/mf/amx/dvt">
   <amx:panelPage id="pp1">
-    <amx:facet name="header">
-      <amx:outputText value="Gallery" id="ot1"/>
+      <amx:facet name="header">
+      <amx:outputText value="Lost Toys" id="ot1"/>
     </amx:facet>
     <amx:panelGroupLayout id="pgl1">
+    
       <amx:carousel id="c1" value="#{bindings.toys.collectionModel}" var="item" controlArea="none">
         <amx:facet name="nodeStamp">
           <amx:carouselItem text="#{item.name}" id="ci1">
             <amx:commandLink id="cl1" action="gotoFindFriend">
-              <amx:image id="i1" source="#{item.image}"/>
+              <amx:image id="i1" source="#{item.image}" inlineStyle="height:200px;width:200px;"/>
               <amx:setPropertyListener id="spl1" from="#{applicationScope.Main.FALSE}" to="#{viewScope.findToy.found}" type="action"/>
               <amx:setPropertyListener id="spl4" from="#{item.id}" to="#{viewScope.toyGallery.selectedToyId}" type="action"/>
             </amx:commandLink>
           </amx:carouselItem>
+          
         </amx:facet>
       </amx:carousel>
-      <amx:outputText value="Tap one of your adopted Lost Toys to find them. Or tap below to adopt a new Lost Toy." id="ot2"/>
-      <amx:commandButton text="Adopt" id="cb1" action="newToy" actionListener="#{viewScope.toyGallery.beforeNewToy}"/>
-    </amx:panelGroupLayout>
+      </amx:panelGroupLayout>
+      
+      <amx:panelGroupLayout id="pgl5" halign="center">
+      <amx:tableLayout id="pgl4"
+                       inlineStyle="border:1px solid gray; padding:5px;margin-left:5%;margin-right:5%;border-radius:5px;">
+      <amx:rowLayout id="rl1">
+        <amx:cellFormat id="cf1">
+          <amx:commandButton text="Adopt a New Lost Toy" id="cb1" action="newToy"
+                             actionListener="#{viewScope.toyGallery.beforeNewToy}" icon="/img/teddy_bear.png"
+                             iconPosition="leading"/>
+        </amx:cellFormat>
+      </amx:rowLayout>
+          </amx:tableLayout>
+</amx:panelGroupLayout>
 
     <amx:panelGroupLayout id="pgl2" rendered="#{pageFlowScope.preferences.debug}">
         <amx:outputText value="Current toy ID = #{pageFlowScope.editToy.toyId}" id="ot3"/>
     </amx:panelGroupLayout>
-
+    <amx:facet name="secondary">
+      <amx:commandButton text="Help" id="cb2" icon="/img/help.png">
+        <amx:showPopupBehavior id="spb1" popupId="p1" type="action" align="overlapMiddleCenter" decoration="simple"
+                               alignId="pp1"/>
+      </amx:commandButton>
+    </amx:facet>
   </amx:panelPage>
+  <amx:popup id="p1" inlineStyle="margin-left:5%; margin-right:5%;">
+    <amx:panelGroupLayout id="pgl3">
+      <amx:outputText id="oh1" value="In the Gallery, swipe to see your adopted Toys. Tap a Lost Toy to use the locator to find them. Tap below to adopt a new Lost Toy."/>
+      <amx:spacer id="s1" height="10"/>
+      <amx:outputText id="oh2" value="In the Finder, the needle will show how close you are to the Lost Toy. When you find one, take their picture to remember them."/>
+      <amx:commandButton text="OK" id="cb3" icon="/img/accept.png">
+        <amx:closePopupBehavior id="cpb1" popupId="p1" type="action"/>
+      </amx:commandButton>
+    </amx:panelGroupLayout>
+  </amx:popup>
 </amx:view>

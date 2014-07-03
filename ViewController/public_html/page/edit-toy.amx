@@ -2,27 +2,51 @@
 <amx:view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amx="http://xmlns.oracle.com/adf/mf/amx"
           xmlns:dvtm="http://xmlns.oracle.com/adf/mf/amx/dvt">
   <amx:panelPage id="pp1">
-    <amx:facet name="header">
-      <amx:outputText value="Toy" id="ot1"/>
-    </amx:facet>
-    <amx:facet name="primary">
-      <amx:commandButton text="Gallery" id="cb4" action="gotoGallery"/>
-    </amx:facet>
     
-        <amx:outputText value="Give a hug to the Lost Toy you want to adopt!" id="ot5" rendered="#{!pageFlowScope.editToy.nearby}"/>
-       
-        <amx:panelGroupLayout id="pgl1" layout="vertical" rendered="#{pageFlowScope.editToy.nearby}">
-        <amx:image id="i1" source="#{pageFlowScope.editToy.image}"/>
-        <amx:commandButton text="Take Photo" id="cb1" actionListener="#{pageFlowScope.editToy.takePicture}"/>
-        <amx:commandButton text="Choose Photo" id="cb2" actionListener="#{pageFlowScope.editToy.choosePicture}"/>
-        <amx:inputText label="Name" id="it1" value="#{pageFlowScope.editToy.newName}" inputType="text"/>
-      <amx:commandButton text="Girl" id="cb8" action="#{pageFlowScope.editToy.generateGirlName}"/>
-      <amx:commandButton text="Boy" id="cb9" action="#{pageFlowScope.editToy.generateBoyName}"/>
-      <amx:commandButton text="Save" id="cb3" action="#{pageFlowScope.editToy.saveChanges}"/>
-      <amx:commandButton text="Unadopt" id="cb5">
-        <amx:showPopupBehavior id="spb1" popupId="p1" align="overlapMiddleCenter" type="action" alignId="pp1"/>
-      </amx:commandButton>
+    <amx:panelGroupLayout  rendered="#{!pageFlowScope.editToy.nearby}" id="pgl0" layout="vertical" halign="center">
+      <amx:spacer id="s1" height="50" width="10"/>
+      <amx:image id="i2" source="/img/favorits.png" inlineStyle="height:64px; width:64px;"/>
+      <amx:outputText value="Give a hug to the Lost Toy you want to adopt!" id="ot5"/>
+    </amx:panelGroupLayout>
+    
+    <amx:panelGroupLayout id="pgl1" layout="vertical" rendered="#{pageFlowScope.editToy.nearby}" halign="center">
+      <amx:spacer id="s2" height="10" width="10"/>
+      <amx:commandLink text="" id="cl1">
+        <amx:showPopupBehavior id="spb2" popupId="p1" type="swipeUp" align="overlapMiddleCenter" alignId="pp1"/>
+        <amx:image id="i1" source="#{pageFlowScope.editToy.image}" inlineStyle="height:200px; width:200px;"/>
+      </amx:commandLink>
+     
+      <amx:tableLayout id="tl1">
+        <amx:rowLayout id="rl1">
+          <amx:cellFormat id="cf1">
+            <amx:commandButton text="Take Photo" id="cb1" actionListener="#{pageFlowScope.editToy.takePicture}"
+                               icon="/img/camera.png"/>
+          </amx:cellFormat>
+          <amx:cellFormat id="cf2">
+            <amx:commandButton text="Choose Photo" id="cb2" actionListener="#{pageFlowScope.editToy.choosePicture}"
+                               icon="/img/photo.png"/>
+          </amx:cellFormat>
+        </amx:rowLayout>
+      </amx:tableLayout>
         </amx:panelGroupLayout>
+        
+        <amx:panelGroupLayout rendered="#{pageFlowScope.editToy.nearby}" id="pgl4" halign="center"
+                              inlineStyle="border-radius:5px; border-style:solid; border-color:Gray; border-width:1px; margin-left:5%; margin-right:5%; margin-bottom:20px;">
+      
+      <amx:inputText id="it1" value="#{pageFlowScope.editToy.newName}" inputType="text"/>
+      <amx:tableLayout id="tl2">
+        <amx:rowLayout id="rl2">
+          <amx:cellFormat id="cf3">
+            <amx:commandButton text="Girl" id="cb8" action="#{pageFlowScope.editToy.generateGirlName}"
+                               icon="/img/user_blondy.png"/>
+          </amx:cellFormat>
+          <amx:cellFormat id="cf4">
+            <amx:commandButton text="Boy" id="cb9" action="#{pageFlowScope.editToy.generateBoyName}"
+                               icon="/img/user.png"/>
+          </amx:cellFormat>
+        </amx:rowLayout>
+      </amx:tableLayout>
+      </amx:panelGroupLayout>
         
 <amx:panelGroupLayout id="pgl2" layout="vertical" rendered="#{pageFlowScope.preferences.debug}">
         <amx:outputText value="UUID: #{pageFlowScope.editToy.newUuid}" id="ot2"/>
@@ -31,15 +55,31 @@
     <amx:outputText value="Current: #{pageFlowScope.editToy.toyId}" id="ot8"/>
     <amx:outputText value="Close: #{pageFlowScope.editToy.nearby}" id="ot9"/>
     </amx:panelGroupLayout>
-    
+    <amx:facet name="header">
+      <amx:outputText value="Adopt Me!" id="ot1"/>
+    </amx:facet>
+    <amx:facet name="primary">
+      <amx:commandButton text="Save" id="cb3" action="#{pageFlowScope.editToy.saveChanges}"/>
+    </amx:facet>
+    <amx:facet name="secondary">
+      <amx:commandButton text="Cancel" id="cb4" action="gotoGallery"/>
+    </amx:facet>
   </amx:panelPage>
-  <amx:popup id="p1">
-    <amx:panelGroupLayout id="pgl3">
+  <amx:popup id="p1" inlineStyle="margin-left:5%; margin-right:5%;">
+    <amx:panelGroupLayout id="pgl5" halign="center">
       <amx:outputText value="Are you sure you want to unadopt #{pageFlowScope.editToy.newName}?" id="ot6"/>
-      <amx:commandButton text="Yes" id="cb6" action="gotoGallery" actionListener="#{pageFlowScope.editToy.unadopt}"/>
-      <amx:commandButton text="No" id="cb7">
-        <amx:closePopupBehavior id="cpb1" popupId="p1" type="action"/>
-      </amx:commandButton>
+      <amx:tableLayout id="p1tl2">
+        <amx:rowLayout id="p1rl2">
+          <amx:cellFormat id="p1cf3">
+              <amx:commandButton text="Yes" id="cb6" action="gotoGallery" actionListener="#{pageFlowScope.editToy.unadopt}"/>
+          </amx:cellFormat>
+          <amx:cellFormat id="p1cf4">
+            <amx:commandButton text="No" id="cb7">
+                <amx:closePopupBehavior id="cpb1" popupId="p1" type="action"/>
+              </amx:commandButton>
+          </amx:cellFormat>
+        </amx:rowLayout>
+      </amx:tableLayout>
     </amx:panelGroupLayout>
 
   </amx:popup>
