@@ -54,7 +54,7 @@ How It Works
 Conclusion
 ----------
 
-A very simple app, totalling about 24 hours of development over two weeks worth of evenings, that demonstrates the use of a number of MAF features. Used to investigate the workings of Estimote beacons, and the latest release of JDeveloper and MAF.  
+A very simple app, totalling about 24 hours of development over several evenings, that demonstrates the use of a number of MAF features. Used to investigate the workings of Estimote beacons, and the latest release of JDeveloper and MAF.  
 
 I think it could be developed into a cool range of toys for Christmas! Or maybe that's just 'cos my kids are always losing stuff.
 
