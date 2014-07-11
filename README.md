@@ -58,3 +58,4 @@ A very simple app, totalling about 24 hours of development over several evenings
 
 I think it could be developed into a cool range of toys for Christmas! Or maybe that's just 'cos my kids are always losing stuff.
 
+You can find more details of how it was developed, in the [wiki](https://github.com/exjones/lost-toys/wiki).
